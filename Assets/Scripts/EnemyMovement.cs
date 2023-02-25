@@ -11,7 +11,14 @@ public class EnemyMovement : MonoBehaviour
     private bool isColliding = false;
     public float movementBond = 15;
 
-    private void Update()
+    private bool isMoving;
+
+    private void Start() 
+    {
+        isMoving = true;
+    }
+
+    private void Update() 
     {
         
     }
@@ -21,7 +28,8 @@ public class EnemyMovement : MonoBehaviour
         FollowPlayer();
     }
 
-    private void FollowPlayer() {
+    private void FollowPlayer() 
+    {
         Vector3 movementDirection = (playerTransform.position - enemyTransform.position);
         movementDirection.y = 0;
         if (Math.Abs(movementDirection.x) < 0.5 * enemyTransform.localScale.x + 0.5 * playerTransform.localScale.x + 0.1) {
@@ -33,4 +41,12 @@ public class EnemyMovement : MonoBehaviour
         }
         enemyTransform.position += speed * movementDirection;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.name);
+        isMoving = false;
+    }
+
+ 
 }
