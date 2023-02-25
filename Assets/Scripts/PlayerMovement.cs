@@ -2,30 +2,55 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D playerBody;
     [SerializeField] private float jumpMagnitude = 100f;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float movementMagnitude = 5f;
+
+    private Rigidbody2D _rigidbody;
+    private PlayerInput _playerInput;
+    private PlayerInputActions _inputActions;
+    private void Awake()
     {
-        
-        
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _playerInput = GetComponent<PlayerInput>();
+        _inputActions = new PlayerInputActions();
+        _inputActions.Enable();
+        _inputActions.Player.Jump.performed += Jump;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        CheckMovement();
+    }
+
+    private void CheckMovement()
+    {
+        var direction = _inputActions.Player.Move.ReadValue<Vector2>();
+        if (direction.y < 0)
         {
-            Jump();
+            DropDown();
         }
+        
+        // We don't want vertical movement to be handled by 'W' and 'S'
+        direction.y = 0;
+        playerBody.AddForce(direction * movementMagnitude);
     }
 
-    void Jump()
+    private void Jump(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
+        
+        Debug.Log("Jump");
         playerBody.AddForce(Vector2.up * jumpMagnitude);
     }
-    
+
+    // Drops down to platform below if plat form is 'dropdownable'
+    private void DropDown()
+    {
+        Debug.Log("Drop Down");
+    }
 }
