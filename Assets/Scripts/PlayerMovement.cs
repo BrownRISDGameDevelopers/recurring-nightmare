@@ -48,9 +48,15 @@ public class PlayerMovement : MonoBehaviour
         playerBody.AddForce(Vector2.up * jumpMagnitude);
     }
 
+
     // Drops down to platform below if plat form is 'dropdownable'
     private void DropDown()
     {
         Debug.Log("Drop Down");
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.name);
     }
 }
