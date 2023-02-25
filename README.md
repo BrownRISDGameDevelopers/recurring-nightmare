@@ -15,7 +15,7 @@ If you want to implement your changes to the main branch, follow these steps.
 
 You can move to your main branch by running `git checkout main`. Then, run `git pull`.
 
-2. Create a new branch by running `git checkout -b <branch-name`. 
+2. Create a new branch by running `git checkout -b <branch-name>`. 
 
 For example, `git checkout -b example-branch`
 
