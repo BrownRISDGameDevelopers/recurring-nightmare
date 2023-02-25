@@ -27,5 +27,10 @@ public class PlayerMovement : MonoBehaviour
     {
         playerBody.AddForce(Vector2.up * jumpMagnitude);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.name);
+    }
     
 }
