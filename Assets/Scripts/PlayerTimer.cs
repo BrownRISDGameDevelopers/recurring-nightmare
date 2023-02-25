@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerTimer : MonoBehaviour
 {
-    [SerializeField] private float time_remaining = 10.0F;
+    [SerializeField] private float time_remaining = 45.0F;
     [SerializeField] private bool timer_is_running = false;
 
     // Start is called before the first frame update
@@ -20,9 +20,11 @@ public class PlayerTimer : MonoBehaviour
                 time_remaining -= Time.deltaTime;
                 display_time();
             } else {
+                // Player won
                 time_remaining = 0.0F;
                 timer_is_running = false;
                 display_time();
+                player_win_event();
             }
         }
     }
@@ -32,5 +34,10 @@ public class PlayerTimer : MonoBehaviour
         float seconds = Mathf.FloorToInt(time_remaining % 60);
         string text = string.Format("{0:00}:{1:00}", minutes, seconds);
         // Debug.Log(text);
+    }
+
+    void player_win_event()
+    {
+        Debug.Log("Player Won!");
     }
 }
