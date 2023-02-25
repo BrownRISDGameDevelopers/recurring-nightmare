@@ -13,10 +13,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private PlayerInput _playerInput;
     private PlayerInputActions _inputActions;
+    private BoxCollider2D _boxColliderPlayer;
+    private Transform _transform;
+    private float _player_height;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
+        _transform = GetComponent<Transform>();
+        _boxColliderPlayer = GetComponent<BoxCollider2D>();
+        _player_height = _boxColliderPlayer.bounds.extents.y;
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
         _inputActions.Player.Jump.performed += Jump;
@@ -30,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckMovement()
     {
         var direction = _inputActions.Player.Move.ReadValue<Vector2>();
+        Debug.Log(isGrounded());
         if (direction.y < 0)
         {
             DropDown();
@@ -58,5 +65,18 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.collider.name);
+    }
+
+    bool isGrounded()
+    {
+        
+        RaycastHit2D hit = Physics2D.Raycast(_boxColliderPlayer.bounds.center, Vector2.down, _player_height);
+        bool isGrounded = hit.collider != null;
+
+        Debug.Log(_boxColliderPlayer.bounds.center);
+        Debug.Log(_player_height);
+
+        Debug.DrawRay(_boxColliderPlayer.bounds.center, Vector2.down * _player_height, isGrounded ? Color.green : Color.red, 0.5f);
+        return isGrounded;
     }
 }
