@@ -132,7 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 8325447303659232289}
-  jumpMagnitude: 100
+  jumpMagnitude: 200
+  movementMagnitude: 5
+  _maxJumpTime: 0.5
+  _jumpAcceleration: 5
 --- !u!50 &8325447303659232289
 Rigidbody2D:
   serializedVersion: 4
