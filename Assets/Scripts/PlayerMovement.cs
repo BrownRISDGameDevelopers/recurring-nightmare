@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -18,13 +19,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDetectionSensitivity = 0.52f;
 
     private PlayerInputActions _inputActions;
-    private bool _isOnGround = true;
+    public bool _isOnGround = true;
     private float _startJumpTime;
 
     private Vector2 _size;
     private Vector2 _sideOffset;
     private Vector2 _heightOffset;
     private float _rayDist;
+    private List<RaycastHit2D> _grounds;
     
     private LayerMask _groundMask;
     private void Awake()
@@ -41,7 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _isOnGround = CheckOnGround();
+        _grounds = CheckOnGround();
+        _isOnGround = _grounds.Any(e => e); // Checks if at least 1 elem is not null
         GetHorizontalInput();
         GetJumpInput();
     }
@@ -74,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
         if (_isOnGround)
         {
             Debug.Log("Jump");
-            _isOnGround = true;
             _startJumpTime = Time.time;
             playerBody.AddForce(Vector2.up * jumpMagnitude);
         }
@@ -94,14 +96,20 @@ public class PlayerMovement : MonoBehaviour
     // Drops down to platform below if plat form is 'dropdownable'
     private void DropDown()
     {
-        Debug.Log("Drop Down");
+        if (_grounds.Where(g => g).Any(g => g.transform.CompareTag("DropDownable")))
+        {
+            Debug.Log("Drop Down");
+        }
     }
 
-    private bool CheckOnGround()
+    private List<RaycastHit2D> CheckOnGround()
     {
         Vector2 center = transform.position;
 
-        return Physics2D.Raycast(center - _sideOffset, Vector2.down, _rayDist, _groundMask) ||
-               Physics2D.Raycast(center - _sideOffset, Vector2.down, _rayDist, _groundMask);
-    }
+        return new List<RaycastHit2D>()
+        {
+            Physics2D.Raycast(center + _sideOffset, Vector2.down, _rayDist, _groundMask),
+            Physics2D.Raycast(center - _sideOffset, Vector2.down, _rayDist, _groundMask)
+        };
+}
 }
