@@ -8,30 +8,45 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D playerBody;
-    [SerializeField] private float jumpMagnitude = 200f;
     [SerializeField] private float movementMagnitude = 5f;
-    [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
 
-    // Variable jump height related variables
+    [Header("Jump related variables")]
+    [SerializeField] private float jumpMagnitude = 200f;
     [SerializeField] private float maxJumpTime = 0.5f;
     [SerializeField] private float jumpAcceleration = 5f;
+    [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
+    [SerializeField] private float groundDetectionSensitivity = 0.52f;
 
     private PlayerInputActions _inputActions;
-    private bool _isJumping = false;
+    private bool _isOnGround = true;
     private float _startJumpTime;
+
+    private Vector2 _size;
+    private Vector2 _sideOffset;
+    private Vector2 _heightOffset;
+    private float _rayDist;
+    
+    private LayerMask _groundMask;
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
+        
+        _groundMask = LayerMask.GetMask("Ground");
+        
+        Vector2 size = transform.localScale;
+        _sideOffset = new Vector2(size.x * 0.5f, 0);
+        _rayDist = size.y * groundDetectionSensitivity;
     }
 
     private void FixedUpdate()
     {
-        CheckGroundMovement();
-        CheckJump();
+        _isOnGround = CheckOnGround();
+        GetHorizontalInput();
+        GetJumpInput();
     }
 
-    private void CheckGroundMovement()
+    private void GetHorizontalInput()
     {
         var direction = _inputActions.Player.Move.ReadValue<Vector2>();
         
@@ -39,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction.y < 0) DropDown();
         direction.y = 0;
         
-        if (_isJumping)
+        if (!_isOnGround)
         {
             direction *= airMovementMultiplier;
         }
@@ -47,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody.AddForce(direction * movementMagnitude);
     }
 
-    private void CheckJump()
+    private void GetJumpInput()
     {
         bool jump = _inputActions.Player.Jump.ReadValue<float>() > 0.5;
         if (!jump) return;
@@ -56,10 +71,10 @@ public class PlayerMovement : MonoBehaviour
         // Each press will only contribute to one first jump.
         // If the player continues pressing the jump key, when the object hits the ground, the object will not jump continuously.
         // Players have to release the jump key and press it again to perform another jump.
-        if (!_isJumping)
+        if (_isOnGround)
         {
             Debug.Log("Jump");
-            _isJumping = true;
+            _isOnGround = true;
             _startJumpTime = Time.time;
             playerBody.AddForce(Vector2.up * jumpMagnitude);
         }
@@ -82,9 +97,11 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Drop Down");
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private bool CheckOnGround()
     {
-        Debug.Log(collision.collider.name);
-        _isJumping = false;
+        Vector2 center = transform.position;
+
+        return Physics2D.Raycast(center - _sideOffset, Vector2.down, _rayDist, _groundMask) ||
+               Physics2D.Raycast(center - _sideOffset, Vector2.down, _rayDist, _groundMask);
     }
 }
