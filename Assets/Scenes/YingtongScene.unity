@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 7091396654622573330, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
   enemyTransform: {fileID: 374361210}
-  playerTransform: {fileID: 1718945850}
+  targetTransform: {fileID: 1718945850}
   shootingSpeed: 1
   shootingPower: 10
 --- !u!4 &1718945850 stripped
