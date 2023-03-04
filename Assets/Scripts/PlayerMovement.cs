@@ -17,16 +17,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpAcceleration = 5f;
 
     private PlayerInputActions _inputActions;
-    private bool _isJumping = false;
+    private bool _isOnGround = true;
     private float _startJumpTime;
+
+    private LayerMask _groundMask;
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
+        
+        _groundMask = LayerMask.GetMask("Ground");
     }
 
     private void FixedUpdate()
     {
+        _isOnGround = RayCastToGround();
         CheckGroundMovement();
         CheckJump();
     }
@@ -39,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction.y < 0) DropDown();
         direction.y = 0;
         
-        if (_isJumping)
+        if (!_isOnGround)
         {
             direction *= airMovementMultiplier;
         }
@@ -56,10 +61,10 @@ public class PlayerMovement : MonoBehaviour
         // Each press will only contribute to one first jump.
         // If the player continues pressing the jump key, when the object hits the ground, the object will not jump continuously.
         // Players have to release the jump key and press it again to perform another jump.
-        if (!_isJumping)
+        if (_isOnGround)
         {
             Debug.Log("Jump");
-            _isJumping = true;
+            _isOnGround = true;
             _startJumpTime = Time.time;
             playerBody.AddForce(Vector2.up * jumpMagnitude);
         }
@@ -82,9 +87,15 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Drop Down");
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private bool RayCastToGround()
     {
-        Debug.Log(collision.collider.name);
-        _isJumping = false;
+        Transform playerTransform = transform;
+        
+        // Consider doing this twice, since there are two points to the player collider: the right edge and the left edge
+        Vector2 pos = playerTransform.position;
+        var dir = Vector2.down;
+        var dist = playerTransform.localScale.y * 0.6f;
+        
+        return Physics2D.Raycast(pos, dir, dist, _groundMask);
     }
 }
