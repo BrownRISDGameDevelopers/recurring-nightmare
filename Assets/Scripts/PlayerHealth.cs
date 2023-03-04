@@ -18,10 +18,10 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		playerHealth = Mathf.Clamp(playerHealth, 0, maxPlayerHealth);
+	    playerHealth = Mathf.Clamp(playerHealth, 0, maxPlayerHealth);
     }
 	
-	void DamagePlayer(float damageAmount)
+	public void DamagePlayer(float damageAmount)
 	{
 		playerHealth -= damageAmount;
 		if(playerHealth <= 0) {
@@ -30,13 +30,13 @@ public class PlayerHealth : MonoBehaviour
 		}
 	}
 	
-	void HealPlayer(float healAmount)
+	public void HealPlayer(float healAmount)
 	{
 		playerHealth += healAmount;
 		if(playerHealth >= maxPlayerHealth) playerHealth = maxPlayerHealth;
 	}
 	
-	bool IsPlayerAlive()
+	public bool IsPlayerAlive()
 	{
 		return playerAlive;
 	}
