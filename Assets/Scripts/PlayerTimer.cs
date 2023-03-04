@@ -1,42 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerTimer : MonoBehaviour
 {
-    [SerializeField] private float time_remaining = 45.0F;
-    [SerializeField] private bool timer_is_running = false;
+    [SerializeField] private float remainingTime = 45.0F;
+    
+    private bool _timerActive = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        timer_is_running = true;
+        _timerActive = true;
     }
     // Update is called once per frame
     void Update()
     {
-        if (timer_is_running) {
-            if (time_remaining > 0.0F) {
-                time_remaining -= Time.deltaTime;
-                display_time();
-            } else {
-                // Player won
-                time_remaining = 0.0F;
-                timer_is_running = false;
-                display_time();
-                player_win_event();
-            }
+        if (!_timerActive) return;
+        
+        if (remainingTime > 0) {
+            remainingTime -= Time.deltaTime;
+            DisplayTime();
+        } else {
+            // Player won
+            remainingTime = 0;
+            _timerActive = false;
+            DisplayTime();
+            PlayerWin();
         }
     }
 
-    void display_time() {
-        float minutes = Mathf.FloorToInt(time_remaining / 60);
-        float seconds = Mathf.FloorToInt(time_remaining % 60);
-        string text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    private void DisplayTime() {
+        float minutes = Mathf.FloorToInt(remainingTime / 60);
+        float seconds = Mathf.FloorToInt(remainingTime % 60);
+        string text = $"{minutes:00}:{seconds:00}";
         // Debug.Log(text);
     }
 
-    void player_win_event()
+    void PlayerWin()
     {
         Debug.Log("Player Won!");
     }
