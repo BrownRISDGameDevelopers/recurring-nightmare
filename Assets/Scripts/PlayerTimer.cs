@@ -19,10 +19,13 @@ public class PlayerTimer : MonoBehaviour
     {
         if (!_timerActive) return;
         
-        if (remainingTime > 0) {
+        if (remainingTime > 0) 
+        {
             remainingTime -= Time.deltaTime;
             DisplayTime();
-        } else {
+        } 
+        else 
+        {
             // Player won
             remainingTime = 0;
             _timerActive = false;
@@ -31,7 +34,8 @@ public class PlayerTimer : MonoBehaviour
         }
     }
 
-    private void DisplayTime() {
+    private void DisplayTime() 
+    {
         float minutes = Mathf.FloorToInt(remainingTime / 60);
         float seconds = Mathf.FloorToInt(remainingTime % 60);
         string text = $"{minutes:00}:{seconds:00}";
