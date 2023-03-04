@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D playerBody;
     [SerializeField] private float jumpMagnitude = 200f;
     [SerializeField] private float movementMagnitude = 5f;
+    [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
 
     // Variable jump height related variables
     [SerializeField] private float maxJumpTime = 0.5f;
@@ -26,17 +27,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckMovement();
+        CheckGroundMovement();
         CheckJump();
     }
 
-    private void CheckMovement()
+    private void CheckGroundMovement()
     {
         var direction = _inputActions.Player.Move.ReadValue<Vector2>();
+        
+        // We don't want vertical movement to be handled by 'W' and 'S', so we set y to 0.
         if (direction.y < 0) DropDown();
-
-        // We don't want vertical movement to be handled by 'W' and 'S'
         direction.y = 0;
+        
+        if (_isJumping)
+        {
+            direction *= airMovementMultiplier;
+        }
+        
         playerBody.AddForce(direction * movementMagnitude);
     }
 
@@ -57,8 +64,8 @@ public class PlayerMovement : MonoBehaviour
             playerBody.AddForce(Vector2.up * jumpMagnitude);
         }
         else if (IsBelowMaxJump()) 
-        // Variable jump height
         {
+            // Variable jump height
             playerBody.AddForce(Vector2.up * jumpAcceleration);
         }
     }
