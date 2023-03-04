@@ -123,6 +123,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &374361206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3515135418602185387, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
+  m_PrefabInstance: {fileID: 3515135418751700896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &374361210 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3515135418602185389, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
+  m_PrefabInstance: {fileID: 3515135418751700896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &374361211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374361206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda714fadddee4e4c9c33f7dda285684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 7091396654622573330, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
+  enemyTransform: {fileID: 374361210}
+  playerTransform: {fileID: 1718945850}
+  shootingSpeed: 1
+  shootingPower: 10
+--- !u!4 &1718945850 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8325447303659232288, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
+  m_PrefabInstance: {fileID: 8325447302627404440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1773000315
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +323,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1792884968
 Rigidbody2D:
@@ -395,6 +427,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3515135418602185390, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1718945850}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
 --- !u!1001 &8325447302627404440
@@ -406,7 +442,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8325447303659232288, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8325447303659232288, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: m_LocalPosition.x
