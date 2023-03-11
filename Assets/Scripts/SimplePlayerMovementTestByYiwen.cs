@@ -5,12 +5,12 @@ using UnityEngine;
 public class SimplePlayerMovementTestByYiwen : MonoBehaviour
 {
     public Transform player;
-    public Rigidbody playerBody;
+    public Rigidbody2D playerBody;
     [SerializeField] private float JumpMagnitude = 10f;
     // Start is called before the first frame update
     void Start()
     {
-        playerBody = GetComponent<Rigidbody>();
+        playerBody = GetComponent<Rigidbody2D>();
         player.position = new Vector3(0, 5, 0);
     }
 
