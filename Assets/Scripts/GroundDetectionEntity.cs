@@ -32,6 +32,14 @@ public abstract class GroundDetectionEntity : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Checks what surface the entity is on, if any
+    /// </summary>
+    /// <returns>
+    /// A Tuple containing the following:
+    /// bool containing whether it is on anything at all,
+    /// List of hits
+    /// </returns>
     protected Tuple<bool, List<RaycastHit2D>> CheckOnGround()
     {
         var groundSurfaces = RayToGround();
