@@ -68,7 +68,7 @@ public class GameHandler : MonoBehaviour
         _isRunning = true;
     }
 
-    void GameOver(string msg)
+    public void GameOver(string msg)
     {
         _timerActive = false;
         _isRunning = false;
