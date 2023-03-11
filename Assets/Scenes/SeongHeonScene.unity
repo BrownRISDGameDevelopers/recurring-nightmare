@@ -638,6 +638,10 @@ PrefabInstance:
       propertyPath: groundDetectionSensitivity
       value: 0.52
       objectReference: {fileID: 0}
+    - target: {fileID: 8096944336832159567, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
 --- !u!1001 &5340902415721646637
