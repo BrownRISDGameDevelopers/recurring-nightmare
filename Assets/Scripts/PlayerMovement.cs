@@ -63,7 +63,6 @@ public class PlayerMovement : GroundDetectionEntity
         // Players have to release the jump key and press it again to perform another jump.
         if (_isOnGround)
         {
-            Debug.Log("Jump");
             _startJumpTime = Time.time;
             playerBody.AddForce(Vector2.up * jumpMagnitude);
         }
@@ -79,13 +78,17 @@ public class PlayerMovement : GroundDetectionEntity
         return Time.time - _startJumpTime < maxJumpTime;
     }
 
-
+    private bool CheckDropDownable()
+    {
+        return _groundSurfaces.Where(g => g).All(g => g.transform.CompareTag("DropDownable"));
+    }
+    
     // Drops down to platform below if plat form is 'dropdownable'
     private void DropDown()
     {
-        if (_groundSurfaces.Where(g => g).Any(g => g.transform.CompareTag("DropDownable")))
-        {
-            Debug.Log("Drop Down");
-        }
+        var surfaces = _groundSurfaces.Where(g => g);
+        if (!surfaces.All(g => g.transform.CompareTag("DropDownable"))) return;
+        
+        
     }
 }
