@@ -52,7 +52,7 @@ public class EnemyMovement : GroundDetectionEntity
     private void AvoidObstacle()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, _enemyBody.velocity.normalized);
-        if (!hit) return;
+        if (!hit || hit.transform.CompareTag("Player")) return;
         
         // Handle the case where the enemy is stuck at the obstacle.
         // Add some horizontal momentum after jumping.
