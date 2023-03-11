@@ -21,11 +21,15 @@ public class PlayerMovement : GroundDetectionEntity
     private float _startJumpTime;
 
     private List<RaycastHit2D> _groundSurfaces;
+
+    private Collider2D _playerCollider;
     
     protected override void Awake()
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
+
+        _playerCollider = GetComponent<Collider2D>();
         
         base.Awake();
     }
@@ -42,7 +46,6 @@ public class PlayerMovement : GroundDetectionEntity
         var direction = _inputActions.Player.Move.ReadValue<Vector2>();
         
         // We don't want vertical movement to be handled by 'W' and 'S', so we set y to 0.
-        if (direction.y < 0) DropDown();
         direction.y = 0;
         
         if (!_isOnGround)
@@ -79,14 +82,5 @@ public class PlayerMovement : GroundDetectionEntity
     private bool IsBelowMaxJump()
     {
         return Time.time - _startJumpTime < maxJumpTime;
-    }
-
-    // Drops down to platform below if plat form is 'dropdownable'
-    private void DropDown()
-    {
-        var surfaces = _groundSurfaces.Where(g => g);
-        if (!surfaces.All(g => g.transform.CompareTag("DropDownable"))) return;
-        
-        
     }
 }

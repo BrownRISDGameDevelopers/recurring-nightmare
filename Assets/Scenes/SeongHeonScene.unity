@@ -717,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6453473893878841603, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
       propertyPath: m_Name
-      value: DropDownablePlatform
+      value: OnewayPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 6453473893878841615, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
       propertyPath: m_UsedByEffector
