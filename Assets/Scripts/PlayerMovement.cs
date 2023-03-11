@@ -16,7 +16,7 @@ public class PlayerMovement : GroundDetectionEntity
     [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
 
     private PlayerInputActions _inputActions;
-    public bool _isOnGround;
+    private bool _isOnGround;
     private float _startJumpTime;
 
     private List<RaycastHit2D> _groundSurfaces;
