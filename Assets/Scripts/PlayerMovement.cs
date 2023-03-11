@@ -8,9 +8,11 @@ public class PlayerMovement : GroundDetectionEntity
 {
     [SerializeField] private Rigidbody2D playerBody;
     [SerializeField] private float movementMagnitude = 5f;
+    [SerializeField] private float maxHorizontalSpeed = 3f;
 
-    [Header("Jump related variables")]
-    [SerializeField] private float jumpMagnitude = 200f;
+    [Header("Jump related variables")] [SerializeField]
+    private float jumpMagnitude = 200f;
+
     [SerializeField] private float maxJumpTime = 0.5f;
     [SerializeField] private float jumpAcceleration = 5f;
     [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
@@ -30,7 +32,6 @@ public class PlayerMovement : GroundDetectionEntity
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
-
         _playerCollider = GetComponent<Collider2D>();
         
         base.Awake();
@@ -43,7 +44,15 @@ public class PlayerMovement : GroundDetectionEntity
             (_isOnGround, _groundSurfaces) = CheckOnGround();
             GetHorizontalInput();
             GetJumpInput();
+            CapHorizontalSpeed();
         }
+    }
+
+    private void CapHorizontalSpeed()
+    {
+        Vector3 v = playerBody.velocity;
+        v.x = Mathf.Clamp(v.x, -maxHorizontalSpeed, maxHorizontalSpeed);
+        playerBody.velocity = v;
     }
 
     private void GetHorizontalInput()
