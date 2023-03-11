@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3515135418602185389
 Transform:
   m_ObjectHideFlags: 0
@@ -99,12 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49234609c73752d4196161ea6fd11651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundDetectionSensitivity: 0.52
+  groundDetectionSensitivity: 0.02
   playerTransform: {fileID: 0}
-  force: 0.1
+  force: 0.3
   jumpForce: 7
   maxVelocity: 3
-  collisionTimeThreshold: 0.1
+  collisionTimeThreshold: 0.3
 --- !u!61 &843256151468167299
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class PlayerMovement : GroundDetectionEntity
 
     private PlayerInputActions _inputActions;
     private bool _isOnGround;
+    private bool _pressedJumpPrevFrame = false;
     private float _startJumpTime;
 
     private List<RaycastHit2D> _groundSurfaces;
@@ -55,22 +56,24 @@ public class PlayerMovement : GroundDetectionEntity
     private void GetJumpInput()
     {
         bool jump = _inputActions.Player.Jump.ReadValue<float>() > 0.5;
-        if (!jump) return;
-        
-        // First jump
-        // Each press will only contribute to one first jump.
-        // If the player continues pressing the jump key, when the object hits the ground, the object will not jump continuously.
-        // Players have to release the jump key and press it again to perform another jump.
-        if (_isOnGround)
+        if (jump)
         {
-            _startJumpTime = Time.time;
-            playerBody.AddForce(Vector2.up * jumpMagnitude);
+            // First jump
+            // Each press will only contribute to one first jump.
+            // If the player continues pressing the jump key, when the object hits the ground, the object will not jump continuously.
+            // Players have to release the jump key and press it again to perform another jump.
+            if (_isOnGround && !_pressedJumpPrevFrame)
+            {
+                _startJumpTime = Time.time;
+                playerBody.AddForce(Vector2.up * jumpMagnitude);
+            }
+            else if (IsBelowMaxJump()) 
+            {
+                // Variable jump height
+                playerBody.AddForce(Vector2.up * jumpAcceleration);
+            }
         }
-        else if (IsBelowMaxJump()) 
-        {
-            // Variable jump height
-            playerBody.AddForce(Vector2.up * jumpAcceleration);
-        }
+        _pressedJumpPrevFrame = jump;
     }
 
     private bool IsBelowMaxJump()
@@ -78,11 +81,6 @@ public class PlayerMovement : GroundDetectionEntity
         return Time.time - _startJumpTime < maxJumpTime;
     }
 
-    private bool CheckDropDownable()
-    {
-        return _groundSurfaces.Where(g => g).All(g => g.transform.CompareTag("DropDownable"));
-    }
-    
     // Drops down to platform below if plat form is 'dropdownable'
     private void DropDown()
     {

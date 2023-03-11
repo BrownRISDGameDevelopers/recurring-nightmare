@@ -6,29 +6,30 @@ using UnityEngine;
 
 public abstract class GroundDetectionEntity : MonoBehaviour
 {
-    [SerializeField] protected float groundDetectionSensitivity = 0.52f;
+    [SerializeField] protected float groundDetectionSensitivity = 1e-3f;
 
     private LayerMask _groundMask;
     private Vector2 _sideOffset;
-    private float _rayDist;
+    private Vector2 _heightOffset;
     
     protected virtual void Awake()
     {
         _groundMask = LayerMask.GetMask("Ground");
         
         Vector2 size = transform.localScale;
-        _sideOffset = new Vector2(size.x * 0.5f, 0);
-        _rayDist = size.y * groundDetectionSensitivity;
+        _sideOffset = new Vector2(size.x * 0.45f, 0);
+        _heightOffset = new Vector2(0, size.y * 0.5f);
     }
     
     private List<RaycastHit2D> RayToGround()
     {
         Vector2 center = transform.position;
+        Vector2 bottom = center - _heightOffset;
     
         return new List<RaycastHit2D>()
         {
-            Physics2D.Raycast(center + _sideOffset, Vector2.down, _rayDist, _groundMask),
-            Physics2D.Raycast(center - _sideOffset, Vector2.down, _rayDist, _groundMask)
+            Physics2D.Raycast(bottom + _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask),
+            Physics2D.Raycast(bottom - _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask)
         };
     }
 
