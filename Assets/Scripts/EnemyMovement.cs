@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 using UnityEngine;
 
 public class EnemyMovement : GroundDetectionEntity
@@ -11,6 +12,9 @@ public class EnemyMovement : GroundDetectionEntity
     [SerializeField] private float maxVelocity;
     [SerializeField] private float collisionTimeThreshold;
     // [SerializeField] private float speed = 0.05f;
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private GameHandler _gameHandler;
+    [SerializeField] private PlayerHealth _playerHealth;
     
     private Rigidbody2D _enemyBody;
     private bool _isOnGround;
@@ -23,11 +27,14 @@ public class EnemyMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        FollowPlayer();
-        ClampVelocity();
+        if (_gameHandler.isRunning())
+        {
+            FollowPlayer();
+            ClampVelocity();
 
-        (_isOnGround, _) = CheckOnGround();
-        if (_isOnGround) AvoidObstacle();
+            (_isOnGround, _) = CheckOnGround();
+            if (_isOnGround) AvoidObstacle();
+        }
     }
 
     private void FollowPlayer() 
@@ -52,8 +59,9 @@ public class EnemyMovement : GroundDetectionEntity
     private void AvoidObstacle()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, _enemyBody.velocity.normalized);
-        if (!hit) return;
-        
+        if (!hit || hit.transform.CompareTag("Player")) return;
+
+
         // Handle the case where the enemy is stuck at the obstacle.
         // Add some horizontal momentum after jumping.
         if (Mathf.Abs(_enemyBody.velocity.x) < 0.12f && hit.distance < 1.0f)
@@ -65,10 +73,18 @@ public class EnemyMovement : GroundDetectionEntity
         else
         {
             float expectedCollisionTime = hit.distance / Mathf.Abs(_enemyBody.velocity.x);
-            if (expectedCollisionTime < collisionTimeThreshold) 
+            if (expectedCollisionTime < collisionTimeThreshold)
             {
                 Jump();
             }
+        }
+    }
+    
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            _playerHealth.DamagePlayer(damage * Time.deltaTime);
         }
     }
 }

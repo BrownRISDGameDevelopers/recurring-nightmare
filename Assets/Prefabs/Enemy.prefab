@@ -12,14 +12,14 @@ GameObject:
   - component: {fileID: 3515135418602185388}
   - component: {fileID: 3515135418602185390}
   - component: {fileID: 843256151468167299}
-  - component: {fileID: 8096944336832159567}
+  - component: {fileID: 8224498448759589464}
   m_Layer: 2
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3515135418602185389
 Transform:
   m_ObjectHideFlags: 0
@@ -99,14 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49234609c73752d4196161ea6fd11651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTransform: {fileID: 3515135418602185389}
+  groundDetectionSensitivity: 0.02
   playerTransform: {fileID: 0}
-  force: 0.1
+  force: 0.3
   jumpForce: 7
   maxVelocity: 3
-  collisionTimeThreshold: 0.6
-  movementBond: 15
-  isInAir: 0
+  collisionTimeThreshold: 0.3
 --- !u!61 &843256151468167299
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &8096944336832159567
+--- !u!50 &8224498448759589464
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -153,4 +151,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
