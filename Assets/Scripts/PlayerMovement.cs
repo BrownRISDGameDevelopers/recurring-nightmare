@@ -15,6 +15,8 @@ public class PlayerMovement : GroundDetectionEntity
     [SerializeField] private float jumpAcceleration = 5f;
     [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
 
+    [SerializeField] private GameHandler _gameHandler;
+
     private PlayerInputActions _inputActions;
     private bool _isOnGround;
     private float _startJumpTime;
@@ -31,9 +33,12 @@ public class PlayerMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        (_isOnGround, _groundSurfaces) = CheckOnGround();
-        GetHorizontalInput();
-        GetJumpInput();
+        if (_gameHandler.isRunning())
+        {
+            (_isOnGround, _groundSurfaces) = CheckOnGround();
+            GetHorizontalInput();
+            GetJumpInput();
+        }
     }
 
     private void GetHorizontalInput()
