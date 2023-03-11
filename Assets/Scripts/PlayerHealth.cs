@@ -5,39 +5,38 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
 	[SerializeField] private float maxPlayerHealth = 20f;
-	[SerializeField] private float playerHealth;
-	[SerializeField] private bool playerAlive; 
+	private float _playerHealth;
+	private bool _playerAlive; 
 	
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = maxPlayerHealth;
-		playerAlive = true;
+        _playerHealth = maxPlayerHealth;
+        _playerAlive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-	    playerHealth = Mathf.Clamp(playerHealth, 0, maxPlayerHealth);
     }
 	
 	public void DamagePlayer(float damageAmount)
 	{
-		playerHealth -= damageAmount;
-		if(playerHealth <= 0) {
-			playerAlive = false;
-			playerHealth = 0;
+		_playerHealth -= damageAmount;
+		if(_playerHealth <= 0) {
+			_playerAlive = false;
+			_playerHealth = 0;
 		}
 	}
 	
 	public void HealPlayer(float healAmount)
 	{
-		playerHealth += healAmount;
-		if(playerHealth >= maxPlayerHealth) playerHealth = maxPlayerHealth;
+		_playerHealth += healAmount;
+		if(_playerHealth >= maxPlayerHealth) _playerHealth = maxPlayerHealth;
 	}
 	
 	public bool IsPlayerAlive()
 	{
-		return playerAlive;
+		return _playerAlive;
 	}
 }
