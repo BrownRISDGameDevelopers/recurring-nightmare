@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &3634923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6453473893878841603, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
-  m_PrefabInstance: {fileID: 5340902415721646637}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &116497063 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6014001025478572033, guid: 3b21fd9d70ed56642a4214ac7fe0c2da, type: 3}
@@ -205,25 +200,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6453473893878841601, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
   m_PrefabInstance: {fileID: 5340902415721646637}
   m_PrefabAsset: {fileID: 0}
---- !u!251 &1366440513
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3634923}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!1001 &1436544726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -718,10 +694,6 @@ PrefabInstance:
     - target: {fileID: 6453473893878841603, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
       propertyPath: m_Name
       value: OnewayPlatform
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453473893878841615, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
-      propertyPath: m_UsedByEffector
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
