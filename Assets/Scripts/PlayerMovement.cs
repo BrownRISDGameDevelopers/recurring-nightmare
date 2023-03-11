@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
     [SerializeField] private float groundDetectionSensitivity = 0.52f;
 
+    [SerializeField] private GameHandler _gameHandler;
+
     private PlayerInputActions _inputActions;
     public bool _isOnGround = true;
     private float _startJumpTime;
@@ -43,10 +45,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _grounds = CheckOnGround();
-        _isOnGround = _grounds.Any(e => e); // Checks if at least 1 elem is not null
-        GetHorizontalInput();
-        GetJumpInput();
+        if (_gameHandler.isRunning())
+        {
+            _grounds = CheckOnGround();
+            _isOnGround = _grounds.Any(e => e); // Checks if at least 1 elem is not null
+            GetHorizontalInput();
+            GetJumpInput();
+        }
     }
 
     private void GetHorizontalInput()
