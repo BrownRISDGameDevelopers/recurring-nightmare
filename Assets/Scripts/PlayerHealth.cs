@@ -67,10 +67,10 @@ public class PlayerHealth : MonoBehaviour
 	    Debug.Log(LayerPlayerImmune);
 	    */
     }
-    
-	public void DamagePlayer(float damageAmount, bool makeImmune)
+
+	public void DamagePlayer(float damageAmount, bool makeImmune = false, bool damageAnyway = false)
 	{
-		if (!_immune)
+		if (!_immune || damageAnyway)
 		{
 			_playerHealth -= damageAmount;
 			if (_playerHealth <= 0)
