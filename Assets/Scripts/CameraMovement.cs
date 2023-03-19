@@ -24,7 +24,9 @@ public class CameraMovement : MonoBehaviour
     // 40% of the height of the cam away from the cam's center.
     [SerializeField] private float maxDeviationY = 0.4f;
     [SerializeField] private float maxDeviationX = 0.05f;
-   
+    [SerializeField] private Vector2 minViewPortSize = new Vector2(-30.0f, -5.0f);
+    [SerializeField] private Vector2 maxViewPortSize = new Vector2(30.0f, 25.0f);
+
     private float cameraHeight;
     private float cameraWidth;
     
@@ -72,15 +74,48 @@ void Start()
         } else if (deviationX < -cameraBoundX) {
             newCameraPosition.x += deviationX + cameraBoundX;
         }
-        
+
+        if(newCameraPosition.y < minViewPortSize.y) {
+            newCameraPosition.y = minViewPortSize.y;
+        } else if(newCameraPosition.y > maxViewPortSize.y) {
+            newCameraPosition.y = maxViewPortSize.y;
+        }
+
+        if (newCameraPosition.x < minViewPortSize.x) {
+            newCameraPosition.x = minViewPortSize.x;
+        }
+        else if (newCameraPosition.x > maxViewPortSize.x) {
+            newCameraPosition.x = maxViewPortSize.x;
+        }
+
         cam.transform.position = newCameraPosition;
     }
 
     void cameraUpdateCentered()
     {
         // Move camera to player's position, but keep original z value.
-        cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y,
+        Vector3 newCameraPosition = new Vector3(playerTransform.position.x, playerTransform.position.y,
             cam.transform.position.z);
+
+        if (newCameraPosition.y < minViewPortSize.y)
+        {
+            newCameraPosition.y = minViewPortSize.y;
+        }
+        else if (newCameraPosition.y > maxViewPortSize.y)
+        {
+            newCameraPosition.y = maxViewPortSize.y;
+        }
+
+        if (newCameraPosition.x < minViewPortSize.x)
+        {
+            newCameraPosition.x = minViewPortSize.x;
+        }
+        else if (newCameraPosition.x > maxViewPortSize.x)
+        {
+            newCameraPosition.x = maxViewPortSize.x;
+        }
+
+        cam.transform.position = newCameraPosition;
     }
     
     void cameraUpdateStationary()
