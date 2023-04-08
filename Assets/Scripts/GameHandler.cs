@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +7,14 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private GameObject startTextObj;
     [SerializeField] private GameObject endTextObj;
     [SerializeField] private float remainingTime = 45.0F;
-    private bool _timerActive = false;
-    private bool _isRunning = false;
-    private bool _gameStarted = false;
+    private bool _timerActive;
+    public enum RunningState
+    {
+        NotYetStarted = 0,
+        Running = 1,
+        GameOver = -1,
+    }
+    public RunningState GameState { get; private set; } = RunningState.NotYetStarted;
 
     private Text _timerText;
     private Text _startText;
@@ -30,15 +33,16 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isRunning)
+        switch (GameState)
         {
-            UpdateTimer();
-            UpdateOverlay();
-        } else if (!_gameStarted && Input.anyKey)
-        {
-            _isRunning = true;
-            _gameStarted = true;
-            startTextObj.SetActive(false);
+            case RunningState.Running:
+                UpdateTimer();
+                UpdateOverlay();
+                break;
+            case RunningState.NotYetStarted when Input.anyKey:
+                GameState = RunningState.Running;
+                startTextObj.SetActive(false);
+                break;
         }
     }
 
@@ -63,21 +67,11 @@ public class GameHandler : MonoBehaviour
         _timerText.text = "Time: " + (int)remainingTime;
     }
 
-    void GameStart()
-    {
-        _isRunning = true;
-    }
-
     public void GameOver(string msg)
     {
+        GameState = RunningState.GameOver;
         _timerActive = false;
-        _isRunning = false;
         _endText.text = msg;
         endTextObj.SetActive(true);
-    }
-
-    public bool isRunning()
-    {
-        return _isRunning;
     }
 }

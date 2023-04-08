@@ -26,14 +26,13 @@ public class EnemyMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        if (_gameHandler.isRunning())
-        {
-            FollowPlayer();
-            ClampVelocity();
+        if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
+        
+        FollowPlayer();
+        ClampVelocity();
 
-            (_isOnGround, _) = CheckOnGround();
-            if (_isOnGround) AvoidObstacle();
-        }
+        (_isOnGround, _) = CheckOnGround();
+        if (_isOnGround) AvoidObstacle();
     }
 
     private void FollowPlayer()
@@ -83,7 +82,7 @@ public class EnemyMovement : GroundDetectionEntity
     
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damage, true);
         }

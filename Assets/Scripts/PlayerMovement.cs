@@ -10,8 +10,8 @@ public class PlayerMovement : GroundDetectionEntity
     [SerializeField] private float movementMagnitude = 5f;
     [SerializeField] private float maxHorizontalSpeed = 3f;
 
-    [Header("Jump related variables")] [SerializeField]
-    private float jumpMagnitude = 200f;
+    [Header("Jump related variables")] 
+    [SerializeField] private float jumpMagnitude = 200f;
 
     [SerializeField] private float maxJumpTime = 0.5f;
     [SerializeField] private float jumpAcceleration = 5f;
@@ -39,13 +39,12 @@ public class PlayerMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        if (_gameHandler.isRunning())
-        {
-            (_isOnGround, _groundSurfaces) = CheckOnGround();
-            GetHorizontalInput();
-            GetJumpInput();
-            CapHorizontalSpeed();
-        }
+        if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
+        
+        (_isOnGround, _groundSurfaces) = CheckOnGround();
+        GetHorizontalInput();
+        GetJumpInput();
+        CapHorizontalSpeed();
     }
 
     private void CapHorizontalSpeed()

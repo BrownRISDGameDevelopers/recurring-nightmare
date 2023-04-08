@@ -6,12 +6,13 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
 	[SerializeField] private float maxPlayerHealth = 10f;
-	[SerializeField] private GameHandler _gameHandler;
-	[SerializeField] private Slider _hpSlider;
+	[SerializeField] private GameHandler gameHandler;
+	[SerializeField] private Slider hpSlider;
 	private float _playerHealth;
 	private bool _playerAlive;
+	
 	// How much time the player is invincible after being damaged.
-	[SerializeField] private float _immuneMax = 3f;
+	[SerializeField] private float immuneMax = 3f;
 	// How much time is remaining before the player will no longer be invincible.
 	private float _immuneTime;
 	// Whether the player is currently immune.
@@ -20,44 +21,43 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-	    makePlayerImmune();
+	    MakePlayerImmune();
 	    // Player starts off immune. We can change this.
-	    _immuneTime = _immuneMax;
+	    _immuneTime = immuneMax;
         _playerHealth = maxPlayerHealth;
         _playerAlive = true;
-        _hpSlider.maxValue = maxPlayerHealth;
-        _hpSlider.value = maxPlayerHealth;
+        hpSlider.maxValue = maxPlayerHealth;
+        hpSlider.value = maxPlayerHealth;
     }
 
     void Update()
     {
-	    _hpSlider.value = _playerHealth;
+	    hpSlider.value = _playerHealth;
     }
 
     void FixedUpdate()
     {
-	    if (_immune)
+	    if (!_immune) return;
+	    
+	    _immuneTime -= Time.deltaTime;
+	    if (_immuneTime <= 0)
 	    {
-		    _immuneTime = _immuneTime - Time.deltaTime;
-		    if (_immuneTime <= 0)
-		    {
-			    _immuneTime = 0;
-			    _immune = false;
-			    Debug.Log("Player is no longer immune.");
-			    /*
+		    _immuneTime = 0;
+		    _immune = false;
+		    Debug.Log("Player is no longer immune.");
+		    /*
 			    // This is if we want to have different layers to allow the player immunity
 			    // from collisions with the enemy.
 			    int LayerPlayerDefault = LayerMask.NameToLayer("PlayerDefault");
 			    gameObject.layer = LayerPlayerDefault;
 			    */
-		    }
 	    }
     }
     
-    public void makePlayerImmune()
+    public void MakePlayerImmune()
     {
 	    _immune = true;
-	    _immuneTime = _immuneMax;
+	    _immuneTime = immuneMax;
 	    Debug.Log("Player is now immune.");
 	    /*
 	    // We can use something like this to temporarily set the player
@@ -70,21 +70,20 @@ public class PlayerHealth : MonoBehaviour
 
 	public void DamagePlayer(float damageAmount, bool makeImmune = false, bool damageAnyway = false)
 	{
-		if (!_immune || damageAnyway)
+		if (_immune && !damageAnyway) return;
+		
+		_playerHealth -= damageAmount;
+		if (_playerHealth <= 0)
 		{
-			_playerHealth -= damageAmount;
-			if (_playerHealth <= 0)
-			{
-				_gameHandler.GameOver("Game Over");
-				_playerAlive = false;
-				_playerHealth = 0;
-			}
-			Debug.Log("Player damaged. Remaining health: " + _playerHealth);
+			gameHandler.GameOver("Game Over");
+			_playerAlive = false;
+			_playerHealth = 0;
+		}
+		Debug.Log("Player damaged. Remaining health: " + _playerHealth);
 
-			if (makeImmune)
-			{
-				makePlayerImmune();
-			}
+		if (makeImmune)
+		{
+			MakePlayerImmune();
 		}
 	}
 
