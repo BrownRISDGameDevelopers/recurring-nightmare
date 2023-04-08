@@ -87,4 +87,10 @@ public class EnemyMovement : GroundDetectionEntity
             collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damage, true);
         }
     }
+
+    public void InitializeEnemy(Transform playerForm, GameHandler gameHandler)
+    {
+        playerTransform = playerForm;
+        _gameHandler = gameHandler;
+    }
 }
