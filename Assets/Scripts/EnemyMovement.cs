@@ -37,8 +37,10 @@ public class EnemyMovement : GroundDetectionEntity
         }
     }
 
-    private void FollowPlayer() 
+    private void FollowPlayer()
     {
+        if ((playerTransform.position - transform.position).magnitude > 7) return;
+        
         float delX = (playerTransform.position.x - transform.position.x);
         Vector2 movementDirection = Mathf.Sign(delX) * Vector2.right;
         _enemyBody.AddForce(movementDirection * force, ForceMode2D.Impulse);
