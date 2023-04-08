@@ -3055,7 +3055,7 @@ PrefabInstance:
       objectReference: {fileID: 2040863531}
     - target: {fileID: 8325447303659232303, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: jumpMagnitude
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8325447303659232303, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: movementMagnitude

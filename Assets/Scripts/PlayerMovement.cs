@@ -23,16 +23,11 @@ public class PlayerMovement : GroundDetectionEntity
     private bool _isOnGround;
     private bool _pressedJumpPrevFrame = false;
     private float _startJumpTime;
-
-    private List<RaycastHit2D> _groundSurfaces;
-
-    private Collider2D _playerCollider;
     
     protected override void Awake()
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
-        _playerCollider = GetComponent<Collider2D>();
         
         base.Awake();
     }
@@ -41,7 +36,7 @@ public class PlayerMovement : GroundDetectionEntity
     {
         if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
         
-        (_isOnGround, _groundSurfaces) = CheckOnGround();
+        (_isOnGround, _) = CheckOnGround();
         GetHorizontalInput();
         GetJumpInput();
         CapHorizontalSpeed();

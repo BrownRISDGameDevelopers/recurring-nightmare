@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
 		_playerHealth -= damageAmount;
 		if (_playerHealth <= 0)
 		{
-			gameHandler.GameOver("Game Over");
+			gameHandler.EndGame("Game Over");
 			_playerAlive = false;
 			_playerHealth = 0;
 		}
