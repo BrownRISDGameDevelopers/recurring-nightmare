@@ -12,10 +12,10 @@ public class HealthPackSpawner : MonoBehaviour
     // How many HealthPacks can be on the map at a time in this spawn location.
     // We might just want to have this always be 1.
     [SerializeField] private int _maxHealthPacks = 1;
-
+    
     void Start()
     {
-        spawnHealthPack();
+        SpawnHealthPack();
     }
     
     void Update()
@@ -26,16 +26,18 @@ public class HealthPackSpawner : MonoBehaviour
             _timeToNextSpawn -= Time.deltaTime;
             if (_timeToNextSpawn <= 0)
             {
-                spawnHealthPack();
+                SpawnHealthPack();
             }
         }
     }
     
-    private void spawnHealthPack()
+    private void SpawnHealthPack()
     {
         Debug.Log("Health pack has been spawned.");
         // Make the HealthPack as child of this HealthPackSpawner.
-        Instantiate(_healthPack, transform);
+        GameObject healthPack = Instantiate(_healthPack);
+        healthPack.transform.position = transform.position;
+        healthPack.transform.parent = transform;
         _timeToNextSpawn = _spawnTime;
     }
 }

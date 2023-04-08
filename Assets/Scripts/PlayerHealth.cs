@@ -32,10 +32,6 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
 	    _hpSlider.value = _playerHealth;
-    }
-
-    void FixedUpdate()
-    {
 	    if (_immune)
 	    {
 		    _immuneTime = _immuneTime - Time.deltaTime;
@@ -53,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
 		    }
 	    }
     }
-    
+
     public void makePlayerImmune()
     {
 	    _immune = true;
