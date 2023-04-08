@@ -7,7 +7,6 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private GameObject startTextObj;
     [SerializeField] private GameObject endTextObj;
     [SerializeField] private float remainingTime = 45.0F;
-    private bool _timerActive;
     public enum RunningState
     {
         NotYetStarted = 0,
@@ -23,7 +22,6 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _timerActive = true;
         _timerText = timerTextObj.GetComponent<Text>();
         _startText = startTextObj.GetComponent<Text>();
         _endText = endTextObj.GetComponent<Text>();
@@ -33,44 +31,33 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (GameState)
+        if (GameState == RunningState.Running)
         {
-            case RunningState.Running:
-                UpdateTimer();
+            remainingTime -= Time.deltaTime;
+            if (remainingTime > 0)
+            {
                 UpdateOverlay();
-                break;
-            case RunningState.NotYetStarted when Input.anyKey:
-                GameState = RunningState.Running;
-                startTextObj.SetActive(false);
-                break;
+            }
+            else
+            {
+                EndGame("Round Over");
+            }
+        }
+        else if (GameState == RunningState.NotYetStarted && Input.anyKey)
+        {
+            GameState = RunningState.Running;
+            startTextObj.SetActive(false);
         }
     }
 
-    void UpdateTimer()
-    {
-        if (!_timerActive) return;
-        
-        if (remainingTime > 0) 
-        {
-            remainingTime -= Time.deltaTime;
-        } 
-        else 
-        {
-            // Player won
-            remainingTime = 0;
-            GameOver("Game Over");
-        }
-    }
-    
     void UpdateOverlay()
     {
         _timerText.text = "Time: " + (int)remainingTime;
     }
 
-    public void GameOver(string msg)
+    public void EndGame(string msg)
     {
         GameState = RunningState.GameOver;
-        _timerActive = false;
         _endText.text = msg;
         endTextObj.SetActive(true);
     }
