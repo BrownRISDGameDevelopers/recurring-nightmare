@@ -26,18 +26,19 @@ public class EnemyMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        if (_gameHandler.isRunning())
-        {
-            FollowPlayer();
-            ClampVelocity();
+        if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
+        
+        FollowPlayer();
+        ClampVelocity();
 
-            (_isOnGround, _) = CheckOnGround();
-            if (_isOnGround) AvoidObstacle();
-        }
+        (_isOnGround, _) = CheckOnGround();
+        if (_isOnGround) AvoidObstacle();
     }
 
-    private void FollowPlayer() 
+    private void FollowPlayer()
     {
+        if ((playerTransform.position - transform.position).magnitude > 7) return;
+        
         float delX = (playerTransform.position.x - transform.position.x);
         Vector2 movementDirection = Mathf.Sign(delX) * Vector2.right;
         _enemyBody.AddForce(movementDirection * force, ForceMode2D.Impulse);
@@ -81,7 +82,7 @@ public class EnemyMovement : GroundDetectionEntity
     
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damage, true);
         }
