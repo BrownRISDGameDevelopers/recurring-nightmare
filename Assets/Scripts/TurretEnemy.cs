@@ -23,7 +23,7 @@ public class TurretEnemy : MonoBehaviour
     {
         for (int i = 0; i < PoolSize; i++)
         {
-            GameObject obj = Instantiate(projectileObject);
+            GameObject obj = Instantiate(projectileObject, gameObject.transform);
             obj.SetActive(false);
             _projectilePool.Add(obj);
         }
