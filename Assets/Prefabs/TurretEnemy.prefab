@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileObject: {fileID: 5802292704817555106}
+  gameHandler: {fileID: 0}
   targetTransform: {fileID: 0}
   shootingInterval: 1
-  projectileSpeed: 20
+  projectileSpeed: 10

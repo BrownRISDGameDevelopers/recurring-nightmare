@@ -84,7 +84,7 @@ public class EnemyMovement : GroundDetectionEntity
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damage, true);
+            collision.gameObject.GetComponent<PlayerHealth>().Damage(damage, true);
         }
     }
 

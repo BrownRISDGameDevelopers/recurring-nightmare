@@ -9,7 +9,7 @@ public class DeathZoneKill : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(10000, false, true);
+            collision.gameObject.GetComponent<PlayerHealth>().Damage(10000, false, true);
         }
         else
         {
