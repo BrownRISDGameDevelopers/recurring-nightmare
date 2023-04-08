@@ -89,7 +89,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		if (Mathf.Approximately(_playerHealth, maxPlayerHealth)) return false;
 
-		_playerHealth = Mathf.Max(_playerHealth + healAmount, maxPlayerHealth);
+		_playerHealth = Mathf.Min(_playerHealth + healAmount, maxPlayerHealth);
 		Debug.Log("Player healed. Remaining health: " + _playerHealth);
 		return true;
 	}

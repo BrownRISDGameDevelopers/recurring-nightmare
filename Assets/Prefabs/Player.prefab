@@ -94,10 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8325447303659232288}
   - component: {fileID: 8325447303659232303}
+  - component: {fileID: 8325447302627404449}
   - component: {fileID: 8325447303659232289}
   - component: {fileID: 8325447303659232290}
   - component: {fileID: 8325447302627404442}
-  - component: {fileID: 8325447302627404449}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -142,6 +142,23 @@ MonoBehaviour:
   jumpAcceleration: 5
   airMovementMultiplier: 0.5
   _gameHandler: {fileID: 0}
+--- !u!114 &8325447302627404449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325447303659232302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cc80e1d07f42c43aca1460e48e4598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameHandler: {fileID: 0}
+  hpSlider: {fileID: 0}
+  maxPlayerHealth: 20
+  immuneTimeAtGameStart: 3
+  immuneTimeAtDamage: 3
 --- !u!50 &8325447303659232289
 Rigidbody2D:
   serializedVersion: 4
@@ -291,19 +308,3 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8325447302627404449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8325447303659232302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9cc80e1d07f42c43aca1460e48e4598, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayerHealth: 20
-  gameHandler: {fileID: 0}
-  hpSlider: {fileID: 0}
-  immuneMax: 3
