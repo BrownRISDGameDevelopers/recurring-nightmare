@@ -9,7 +9,7 @@ public class HealthPack : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             // I thought this would ignore the physics collision so there wouldn't be
             // a stutter when the player picked up the HealthPack, but it only ignores future collisions.
