@@ -9,6 +9,7 @@ public class EnemyFlying : MonoBehaviour
     [SerializeField] private GameHandler gameHandler;
     NavMeshAgent agent;
     GameObject target = null;
+    bool follow = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +25,35 @@ public class EnemyFlying : MonoBehaviour
     {
         if (gameHandler.GameState != GameHandler.RunningState.Running) return;
 
-        if (target != null)
+        if (follow && target != null)
         {
-            var agentDrift = 0.0001f; // minimal
-            var driftPos = target.transform.position + (Vector3)(agentDrift * Random.insideUnitCircle);
-            agent.SetDestination(driftPos);
+            // Pathfinding
+            agent.SetDestination(target.transform.position);
         }
-        else
+        else if(target == null)
         {
             target = GameObject.FindGameObjectWithTag(targetTag);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // If the enemy collided with target, stop where it is
+        if (collision.gameObject.tag == targetTag)
+        {
+            follow = false;
+            agent.SetDestination(transform.position);  // Stop here
+            agent.isStopped = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // If the enemy and the target are no longer collided, start pathfinding
+        if (collision.gameObject.tag == targetTag)
+        {
+            follow = true;
+            agent.isStopped = false;
         }
     }
 }
