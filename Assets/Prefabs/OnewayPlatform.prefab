@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_UsedByEffector
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6187174548107214032, guid: 3b21fd9d70ed56642a4214ac7fe0c2da, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b21fd9d70ed56642a4214ac7fe0c2da, type: 3}
 --- !u!1 &6453473893878841603 stripped
@@ -89,7 +93,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
