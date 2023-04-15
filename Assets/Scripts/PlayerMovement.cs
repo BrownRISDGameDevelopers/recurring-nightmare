@@ -10,8 +10,8 @@ public class PlayerMovement : GroundDetectionEntity
     [SerializeField] private float movementMagnitude = 5f;
     [SerializeField] private float maxHorizontalSpeed = 3f;
 
-    [Header("Jump related variables")] [SerializeField]
-    private float jumpMagnitude = 200f;
+    [Header("Jump related variables")] 
+    [SerializeField] private float jumpMagnitude = 200f;
 
     [SerializeField] private float maxJumpTime = 0.5f;
     [SerializeField] private float jumpAcceleration = 5f;
@@ -23,29 +23,23 @@ public class PlayerMovement : GroundDetectionEntity
     private bool _isOnGround;
     private bool _pressedJumpPrevFrame = false;
     private float _startJumpTime;
-
-    private List<RaycastHit2D> _groundSurfaces;
-
-    private Collider2D _playerCollider;
     
     protected override void Awake()
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
-        _playerCollider = GetComponent<Collider2D>();
         
         base.Awake();
     }
 
     private void FixedUpdate()
     {
-        if (_gameHandler.isRunning())
-        {
-            (_isOnGround, _groundSurfaces) = CheckOnGround();
-            GetHorizontalInput();
-            GetJumpInput();
-            CapHorizontalSpeed();
-        }
+        if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
+        
+        (_isOnGround, _) = CheckOnGround();
+        GetHorizontalInput();
+        GetJumpInput();
+        CapHorizontalSpeed();
     }
 
     private void CapHorizontalSpeed()

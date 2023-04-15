@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +7,13 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private GameObject startTextObj;
     [SerializeField] private GameObject endTextObj;
     [SerializeField] private float remainingTime = 45.0F;
-    private bool _timerActive = false;
-    private bool _isRunning = false;
-    private bool _gameStarted = false;
+    public enum RunningState
+    {
+        NotYetStarted = 0,
+        Running = 1,
+        GameOver = -1,
+    }
+    public RunningState GameState { get; private set; } = RunningState.NotYetStarted;
 
     private Text _timerText;
     private Text _startText;
@@ -20,7 +22,6 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _timerActive = true;
         _timerText = timerTextObj.GetComponent<Text>();
         _startText = startTextObj.GetComponent<Text>();
         _endText = endTextObj.GetComponent<Text>();
@@ -30,54 +31,34 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isRunning)
+        if (GameState == RunningState.Running)
         {
-            UpdateTimer();
-            UpdateOverlay();
-        } else if (!_gameStarted && Input.anyKey)
+            remainingTime -= Time.deltaTime;
+            if (remainingTime > 0)
+            {
+                UpdateOverlay();
+            }
+            else
+            {
+                EndGame("Round Over");
+            }
+        }
+        else if (GameState == RunningState.NotYetStarted && Input.anyKey)
         {
-            _isRunning = true;
-            _gameStarted = true;
+            GameState = RunningState.Running;
             startTextObj.SetActive(false);
         }
     }
 
-    void UpdateTimer()
-    {
-        if (!_timerActive) return;
-        
-        if (remainingTime > 0) 
-        {
-            remainingTime -= Time.deltaTime;
-        } 
-        else 
-        {
-            // Player won
-            remainingTime = 0;
-            GameOver("Game Over");
-        }
-    }
-    
     void UpdateOverlay()
     {
         _timerText.text = "Time: " + (int)remainingTime;
     }
 
-    void GameStart()
+    public void EndGame(string msg)
     {
-        _isRunning = true;
-    }
-
-    public void GameOver(string msg)
-    {
-        _timerActive = false;
-        _isRunning = false;
+        GameState = RunningState.GameOver;
         _endText.text = msg;
         endTextObj.SetActive(true);
-    }
-
-    public bool isRunning()
-    {
-        return _isRunning;
     }
 }

@@ -29,7 +29,8 @@ public abstract class GroundDetectionEntity : MonoBehaviour
         return new List<RaycastHit2D>()
         {
             Physics2D.Raycast(bottom + _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask),
-            Physics2D.Raycast(bottom - _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask)
+            Physics2D.Raycast(bottom - _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask),
+            Physics2D.Raycast(bottom, Vector2.down, groundDetectionSensitivity, _groundMask)
         };
     }
 
@@ -38,12 +39,13 @@ public abstract class GroundDetectionEntity : MonoBehaviour
     /// </summary>
     /// <returns>
     /// A Tuple containing the following:
-    /// bool containing whether it is on anything at all,
+    /// bool containing whether it is on anything at all and a
     /// List of hits
     /// </returns>
     protected Tuple<bool, List<RaycastHit2D>> CheckOnGround()
     {
         var groundSurfaces = RayToGround();
-        return new Tuple<bool, List<RaycastHit2D>>(groundSurfaces.Any(s => s), groundSurfaces);
+        int hitCount = RayToGround().Count(hit2D => hit2D == true);
+        return new Tuple<bool, List<RaycastHit2D>>(hitCount > 1, groundSurfaces);
     }
 }

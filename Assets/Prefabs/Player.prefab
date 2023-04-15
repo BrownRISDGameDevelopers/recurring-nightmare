@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8325447303659232288}
   - component: {fileID: 8325447303659232303}
+  - component: {fileID: 8325447302627404449}
   - component: {fileID: 8325447303659232289}
   - component: {fileID: 8325447303659232290}
   - component: {fileID: 8325447302627404442}
@@ -135,10 +136,29 @@ MonoBehaviour:
   groundDetectionSensitivity: 0.02
   playerBody: {fileID: 8325447303659232289}
   movementMagnitude: 50
-  jumpMagnitude: 300
+  maxHorizontalSpeed: 5
+  jumpMagnitude: 500
   maxJumpTime: 0.5
   jumpAcceleration: 5
   airMovementMultiplier: 0.5
+  _gameHandler: {fileID: 0}
+--- !u!114 &8325447302627404449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325447303659232302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cc80e1d07f42c43aca1460e48e4598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameHandler: {fileID: 0}
+  hpSlider: {fileID: 0}
+  maxPlayerHealth: 20
+  immuneTimeAtGameStart: 3
+  immuneTimeAtDamage: 3
 --- !u!50 &8325447303659232289
 Rigidbody2D:
   serializedVersion: 4
@@ -152,9 +172,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.2
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

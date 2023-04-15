@@ -1,59 +1,61 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
+	[SerializeField] private GameHandler gameHandler;
+	[SerializeField] private Slider hpSlider;
+	
+	[Header("Player Health")] 
 	[SerializeField] private float maxPlayerHealth = 10f;
-	[SerializeField] private GameHandler _gameHandler;
-	[SerializeField] private Slider _hpSlider;
+	[SerializeField] private float immuneTimeAtGameStart = 3f;
+	[SerializeField] private float immuneTimeAtDamage = 3f;
+	
+	private float _remainingImmuneTime;
+	private bool _isImmune;
 	private float _playerHealth;
-	private bool _playerAlive;
-	// How much time the player is invincible after being damaged.
-	[SerializeField] private float _immuneMax = 3f;
-	// How much time is remaining before the player will no longer be invincible.
-	private float _immuneTime;
-	// Whether the player is currently immune.
-	private bool _immune;
 	
     // Start is called before the first frame update
     void Start()
     {
-	    makePlayerImmune();
+	    MakeImmune(immuneTimeAtGameStart);
 	    // Player starts off immune. We can change this.
-	    _immuneTime = _immuneMax;
         _playerHealth = maxPlayerHealth;
-        _playerAlive = true;
-        _hpSlider.maxValue = maxPlayerHealth;
-        _hpSlider.value = maxPlayerHealth;
+        hpSlider.maxValue = maxPlayerHealth;
+        hpSlider.value = maxPlayerHealth;
     }
 
     void Update()
     {
-	    _hpSlider.value = _playerHealth;
-	    if (_immune)
+	    hpSlider.value = _playerHealth;
+      
+	    if (!_isImmune) return;
+	    
+	    _remainingImmuneTime -= Time.deltaTime;
+	    if (_remainingImmuneTime <= 0)
 	    {
-		    _immuneTime = _immuneTime - Time.deltaTime;
-		    if (_immuneTime <= 0)
-		    {
-			    _immuneTime = 0;
-			    _immune = false;
-			    Debug.Log("Player is no longer immune.");
-			    /*
+		    _remainingImmuneTime = 0;
+		    _isImmune = false;
+		    Debug.Log("Player is no longer immune.");
+		    /*
 			    // This is if we want to have different layers to allow the player immunity
 			    // from collisions with the enemy.
 			    int LayerPlayerDefault = LayerMask.NameToLayer("PlayerDefault");
 			    gameObject.layer = LayerPlayerDefault;
 			    */
-		    }
 	    }
     }
 
-    public void makePlayerImmune()
+    private void MakeImmune(float duration)
     {
-	    _immune = true;
-	    _immuneTime = _immuneMax;
+	    _isImmune = true;
+	    _remainingImmuneTime = duration;
 	    Debug.Log("Player is now immune.");
 	    /*
 	    // We can use something like this to temporarily set the player
@@ -64,40 +66,31 @@ public class PlayerHealth : MonoBehaviour
 	    */
     }
 
-	public void DamagePlayer(float damageAmount, bool makeImmune = false, bool damageAnyway = false)
+	public void Damage(float damageAmount, bool makeImmune = false, bool damageAnyway = false)
 	{
-		if (!_immune || damageAnyway)
+		if (_isImmune && !damageAnyway) return;
+		
+		_playerHealth -= damageAmount;
+		if (_playerHealth <= 0)
 		{
-			_playerHealth -= damageAmount;
-			if (_playerHealth <= 0)
-			{
-				_gameHandler.GameOver("Game Over");
-				_playerAlive = false;
-				_playerHealth = 0;
-			}
-			Debug.Log("Player damaged. Remaining health: " + _playerHealth);
+			gameHandler.EndGame("Game Over");
+			_playerHealth = 0;
+		}
+		Debug.Log("Player damaged. Remaining health: " + _playerHealth);
 
-			if (makeImmune)
-			{
-				makePlayerImmune();
-			}
+		if (makeImmune)
+		{
+			MakeImmune(immuneTimeAtDamage);
 		}
 	}
-
-	public void HealPlayer(float healAmount)
-	{
-		_playerHealth += healAmount;
-		if(_playerHealth >= maxPlayerHealth) _playerHealth = maxPlayerHealth;
-		Debug.Log("Player healed. Remaining health: " + _playerHealth);
-	}
-
-	public bool IsPlayerImmune()
-	{
-		return _immune;
-	}
 	
-	public bool IsPlayerAlive()
+	// Returns true if player received heal (doesn't need to be full heal), otherwise false 
+	public bool Heal(float healAmount)
 	{
-		return _playerAlive;
+		if (Mathf.Approximately(_playerHealth, maxPlayerHealth)) return false;
+
+		_playerHealth = Mathf.Min(_playerHealth + healAmount, maxPlayerHealth);
+		Debug.Log("Player healed. Remaining health: " + _playerHealth);
+		return true;
 	}
 }
