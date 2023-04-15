@@ -1770,6 +1770,10 @@ MonoBehaviour:
   _spawnTime: 10
   _spawnOnStart: 0
   _maxEnemies: 1
+  enemy_positions:
+  - {x: 1, y: 1, z: 1}
+  - {x: -1, y: 2, z: 1}
+  enemy_ID: 0000000000000000
   enemyPrefabList:
   - {fileID: 3515135418602185387, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
   hasSpawned: 0
