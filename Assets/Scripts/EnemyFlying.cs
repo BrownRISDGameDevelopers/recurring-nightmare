@@ -7,13 +7,15 @@ public class EnemyFlying : MonoBehaviour
 {
     [SerializeField] private string targetTag = "Player";
     [SerializeField] private GameHandler gameHandler;
+    Vector3 basePosition;
     NavMeshAgent agent;
     GameObject target = null;
-    bool follow = true;
+    bool track = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -25,7 +27,7 @@ public class EnemyFlying : MonoBehaviour
     {
         if (gameHandler.GameState != GameHandler.RunningState.Running) return;
 
-        if (follow && target != null)
+        if (track && target != null)
         {
             // Pathfinding
             agent.SetDestination(target.transform.position);
@@ -36,24 +38,33 @@ public class EnemyFlying : MonoBehaviour
         }
     }
 
+    void startTrack()
+    {
+        Debug.Log("start track called");
+        track = true;
+    }
+
+    void stopTrack()
+    {
+        Debug.Log("stop track called");
+        track = false;
+        agent.SetDestination(basePosition);  // Heading to base
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If the enemy collided with target, stop where it is
-        if (collision.gameObject.tag == targetTag)
+        if (collision.tag == targetTag)
         {
-            follow = false;
-            agent.SetDestination(transform.position);  // Stop here
-            agent.isStopped = true;
+            track = false;
+            agent.SetDestination(transform.position);  // Heading to base
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // If the enemy and the target are no longer collided, start pathfinding
-        if (collision.gameObject.tag == targetTag)
+        if (collision.tag == targetTag)
         {
-            follow = true;
-            agent.isStopped = false;
+            track = true;
         }
     }
 }
