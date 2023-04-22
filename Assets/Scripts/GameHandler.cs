@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public static class GameHandler
 {
-    private const float TotalTime = 30f;
-    public static float RemainingTime = TotalTime;
-    public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
-
     public enum RunningState
     {
         NotYetStarted = 0,
         Running = 1,
         GameOver = -1,
     }
+    
+    private const float TotalTime = 30f;
+    private static bool _isNight = true;
+
+    public static float RemainingTime = TotalTime;
+    public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
     public static RunningState GameState = RunningState.NotYetStarted;
     
     public static void EndGameAsDefeat()
@@ -25,8 +27,10 @@ public static class GameHandler
     public static void EndGameAsWin()
     {
         GameState = RunningState.GameOver;
-        SceneManager.LoadScene("SeongHeonScene");
-        GameState = RunningState.Running;
+
+        SceneManager.LoadScene(_isNight ? "SeongHeonScene" : "PlayTestScene");
+
+        GameState = RunningState.NotYetStarted;
         RemainingTime = TotalTime;
     }
 }
