@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4963767035382682424}
-  - component: {fileID: 4963767035382682427}
+  - component: {fileID: 688248346743608341}
+  - component: {fileID: 6364431868787708454}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4963767035382682427
+--- !u!114 &688248346743608341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +42,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 4963767035382682425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d7f6f15a44d3764fb5387258f7d78a0, type: 3}
+  m_Script: {fileID: 11500000, guid: c14612341e5786848b22f090e2b43fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 3515135418602185387, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
-  _spawnTime: 20
-  _maxEnemies: 3
+  _gameHandler: {fileID: 0}
+  _playerTransform: {fileID: 0}
+  _spawnTime: 10
+  _spawnOnStart: 0
+  _maxEnemies: 1
+  enemy_positions: []
+  enemy_ID: 
+  enemyPrefabList: []
+  hasSpawned: 0
+--- !u!61 &6364431868787708454
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963767035382682425}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
