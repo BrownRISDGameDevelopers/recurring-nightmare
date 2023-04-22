@@ -17,13 +17,13 @@ public class EnemyFlying : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        target = GameHandler.Player;
+        target = GameManager.Player;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameManager.GameState != GameManager.RunningState.Running) return;
 
         if (track && target != null)
         {
@@ -32,7 +32,7 @@ public class EnemyFlying : MonoBehaviour
         }
         else if(target == null)
         {
-            target = GameHandler.Player;
+            target = GameManager.Player;
         }
     }
 

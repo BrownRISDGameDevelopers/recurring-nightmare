@@ -36,7 +36,7 @@ public class CameraMovement : MonoBehaviour
     
 void Start()
 {
-    _playerTransform = GameHandler.Player.transform;
+    _playerTransform = GameManager.Player.transform;
         
     _cameraHeight = cam.orthographicSize;
     _cameraWidth = _cameraHeight * cam.aspect;

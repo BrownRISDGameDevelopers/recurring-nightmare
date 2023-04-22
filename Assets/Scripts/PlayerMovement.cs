@@ -32,7 +32,7 @@ public class PlayerMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameManager.GameState != GameManager.RunningState.Running) return;
         
         (_isOnGround, _) = CheckOnGround();
         GetHorizontalInput();

@@ -88,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
 		playerHealth -= damageAmount;
 		if (playerHealth <= 0)
 		{
-			GameHandler.EndGameAsDefeat();
+			GameManager.EndGameAsDefeat();
 			playerHealth = 0;
 		}
 		

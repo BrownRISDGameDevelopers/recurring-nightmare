@@ -20,13 +20,13 @@ public class EnemyMovement : GroundDetectionEntity
     protected override void Awake() 
     {
         _enemyBody = GetComponent<Rigidbody2D>();
-        _playerTransform = GameHandler.Player.transform;
+        _playerTransform = GameManager.Player.transform;
         base.Awake();
     }
 
     private void FixedUpdate()
     {
-        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameManager.GameState != GameManager.RunningState.Running) return;
         
         FollowPlayer();
         ClampVelocity();

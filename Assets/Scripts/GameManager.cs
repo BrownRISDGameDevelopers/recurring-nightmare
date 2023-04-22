@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public static class GameHandler
+public static class GameManager
 {
     public enum RunningState
     {

@@ -23,7 +23,7 @@ public class TurretEnemy : MonoBehaviour
 
     private void Start()
     {
-        _targetTransform = GameHandler.Player.transform;
+        _targetTransform = GameManager.Player.transform;
         for (int i = 0; i < PoolSize; i++)
         {
             var tmp = Instantiate(projectileObject, gameObject.transform);
@@ -49,7 +49,7 @@ public class TurretEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameManager.GameState != GameManager.RunningState.Running) return;
 
         _shootingTimer += Time.deltaTime;
         if (_shootingTimer < shootingInterval || !HasLineOfSight()) return;

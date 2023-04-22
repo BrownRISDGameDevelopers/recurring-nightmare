@@ -23,27 +23,27 @@ public class TimeManager : MonoBehaviour
     
     void UpdateOverlay()
     {
-        _timerText.text = "Time: " + (int)GameHandler.RemainingTime;
+        _timerText.text = "Time: " + (int)GameManager.RemainingTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameHandler.GameState == GameHandler.RunningState.Running)
+        if (GameManager.GameState == GameManager.RunningState.Running)
         {
-            GameHandler.RemainingTime -= Time.deltaTime;
-            if (GameHandler.RemainingTime > 0)
+            GameManager.RemainingTime -= Time.deltaTime;
+            if (GameManager.RemainingTime > 0)
             {
                 UpdateOverlay();
             }
             else
             {
-                GameHandler.EndGameAsWin();
+                GameManager.EndGameAsWin();
             }
         }
-        else if (GameHandler.GameState == GameHandler.RunningState.NotYetStarted && Input.anyKey)
+        else if (GameManager.GameState == GameManager.RunningState.NotYetStarted && Input.anyKey)
         {
-            GameHandler.GameState = GameHandler.RunningState.Running;
+            GameManager.GameState = GameManager.RunningState.Running;
             startTextObj.SetActive(false);
         }
     }
