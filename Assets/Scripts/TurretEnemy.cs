@@ -9,9 +9,12 @@ public class TurretEnemy : MonoBehaviour
     [SerializeField] private GameObject projectileObject;
     [SerializeField] private GameHandler gameHandler;
     [SerializeField] private Transform targetTransform; // Transform of the target
+    
+    [Header("Attack Behavior")]
     [SerializeField] private float shootingInterval = 1.0f; // Interval between each projectile
     [SerializeField] private float projectileSpeed = 10.0f;
-    [SerializeField] private float range = 20f;
+    [FormerlySerializedAs("range")] [SerializeField] private float visionRange = 20f;
+    [SerializeField] private float contactDamage = 2f;
 
     private const int PoolSize = 10;
     private readonly List<GameObject> _projectilePool = new List<GameObject>();
@@ -40,7 +43,7 @@ public class TurretEnemy : MonoBehaviour
             return false;
         }
 
-        return Vector2.Distance(hit.point, position) < range;
+        return Vector2.Distance(hit.point, position) < visionRange;
     }
 
     // Update is called once per frame
@@ -65,5 +68,13 @@ public class TurretEnemy : MonoBehaviour
         projectile.transform.right = targetTransform.position - turretPosition;
         projectile.SetActive(true);
         projectile.GetComponent<Rigidbody2D>().velocity = _targetDirection * projectileSpeed;
+    }
+    
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().Damage(contactDamage, true);
+        }
     }
 }
