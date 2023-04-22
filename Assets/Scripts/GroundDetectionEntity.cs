@@ -46,6 +46,6 @@ public abstract class GroundDetectionEntity : MonoBehaviour
     {
         var groundSurfaces = RayToGround();
         int hitCount = RayToGround().Count(hit2D => hit2D == true);
-        return new Tuple<bool, List<RaycastHit2D>>(hitCount > 1, groundSurfaces);
+        return new Tuple<bool, List<RaycastHit2D>>(hitCount > 0, groundSurfaces);
     }
 }

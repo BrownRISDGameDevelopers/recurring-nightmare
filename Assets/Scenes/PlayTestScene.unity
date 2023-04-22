@@ -1633,18 +1633,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6155685041665426424, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155685041665426424, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155685041665426424, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155685041665426424, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6189921346760467122, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 6189921346760467122, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6436364020136864312, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: gameHandler
       value: 
       objectReference: {fileID: 2040863531}
+    - target: {fileID: 6629029143765000202, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 8325447302627404448}
     - target: {fileID: 6629029143765000202, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: gameHandler
       value: 
@@ -2406,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6453473893878841601, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.76
+      value: 3.69
       objectReference: {fileID: 0}
     - target: {fileID: 6453473893878841601, guid: f764a1ed0c90f0d41834f8769736c075, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2765,37 +2785,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3515135418602185389, guid: 08bd43fe8a362cc439d67fac95001486, type: 3}
   m_PrefabInstance: {fileID: 1788822515}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1839208944 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1320827745346533499, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
-  m_PrefabInstance: {fileID: 1325768074}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1839208951
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839208944}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &1864392604
 PrefabInstance:
   m_ObjectHideFlags: 0

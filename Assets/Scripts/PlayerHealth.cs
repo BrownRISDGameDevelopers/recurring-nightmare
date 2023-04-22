@@ -17,32 +17,32 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float immuneTimeAtGameStart = 3f;
 	[SerializeField] private float immuneTimeAtDamage = 3f;
 	
-	private float _remainingImmuneTime;
-	private bool _isImmune;
-	private float _playerHealth;
+	[Header("Health Debug Info")]
+	[SerializeField] private float remainingImmuneTime;
+	[SerializeField] private bool isImmune;
+	[SerializeField] private float playerHealth;
 	
     // Start is called before the first frame update
     void Start()
     {
 	    MakeImmune(immuneTimeAtGameStart);
 	    // Player starts off immune. We can change this.
-        _playerHealth = maxPlayerHealth;
+        playerHealth = maxPlayerHealth;
         hpSlider.maxValue = maxPlayerHealth;
         hpSlider.value = maxPlayerHealth;
     }
 
     void Update()
     {
-	    hpSlider.value = _playerHealth;
+	    hpSlider.value = playerHealth;
       
-	    if (!_isImmune) return;
+	    if (!isImmune) return;
 	    
-	    _remainingImmuneTime -= Time.deltaTime;
-	    if (_remainingImmuneTime <= 0)
+	    remainingImmuneTime -= Time.deltaTime;
+	    if (remainingImmuneTime <= 0)
 	    {
-		    _remainingImmuneTime = 0;
-		    _isImmune = false;
-		    Debug.Log("Player is no longer immune.");
+		    remainingImmuneTime = 0;
+		    isImmune = false;
 		    /*
 			    // This is if we want to have different layers to allow the player immunity
 			    // from collisions with the enemy.
@@ -54,9 +54,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void MakeImmune(float duration)
     {
-	    _isImmune = true;
-	    _remainingImmuneTime = duration;
-	    Debug.Log("Player is now immune.");
+	    isImmune = true;
+	    remainingImmuneTime = duration;
 	    /*
 	    // We can use something like this to temporarily set the player
 	    // to a layer where they won't collide with the enemy.
@@ -68,16 +67,15 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Damage(float damageAmount, bool makeImmune = false, bool damageAnyway = false)
 	{
-		if (_isImmune && !damageAnyway) return;
+		if (isImmune && !damageAnyway) return;
 		
-		_playerHealth -= damageAmount;
-		if (_playerHealth <= 0)
+		playerHealth -= damageAmount;
+		if (playerHealth <= 0)
 		{
 			gameHandler.EndGame("Game Over");
-			_playerHealth = 0;
+			playerHealth = 0;
 		}
-		Debug.Log("Player damaged. Remaining health: " + _playerHealth);
-
+		
 		if (makeImmune)
 		{
 			MakeImmune(immuneTimeAtDamage);
@@ -87,10 +85,9 @@ public class PlayerHealth : MonoBehaviour
 	// Returns true if player received heal (doesn't need to be full heal), otherwise false 
 	public bool Heal(float healAmount)
 	{
-		if (Mathf.Approximately(_playerHealth, maxPlayerHealth)) return false;
+		if (Mathf.Approximately(playerHealth, maxPlayerHealth)) return false;
 
-		_playerHealth = Mathf.Min(_playerHealth + healAmount, maxPlayerHealth);
-		Debug.Log("Player healed. Remaining health: " + _playerHealth);
+		playerHealth = Mathf.Min(playerHealth + healAmount, maxPlayerHealth);
 		return true;
 	}
 }
