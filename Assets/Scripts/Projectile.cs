@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("hit");
             other.gameObject.GetComponent<PlayerHealth>().Damage(damage);
             DisableSelf();
         }
