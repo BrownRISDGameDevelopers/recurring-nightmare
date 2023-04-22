@@ -6,27 +6,27 @@ using UnityEngine;
 
 public class EnemyMovement : GroundDetectionEntity
 {
-    [SerializeField] private Transform playerTransform;
     [SerializeField] private float force;
     [SerializeField] private float jumpForce;
     [SerializeField] private float maxVelocity;
     [SerializeField] private float collisionTimeThreshold;
     // [SerializeField] private float speed = 0.05f;
     [FormerlySerializedAs("damage")] [SerializeField] private float contactDamage = 2f;
-    [SerializeField] private GameHandler _gameHandler;
 
     private Rigidbody2D _enemyBody;
     private bool _isOnGround;
+    private Transform _playerTransform;
 
     protected override void Awake() 
     {
         _enemyBody = GetComponent<Rigidbody2D>();
+        _playerTransform = GameHandler.Player.transform;
         base.Awake();
     }
 
     private void FixedUpdate()
     {
-        if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
         
         FollowPlayer();
         ClampVelocity();
@@ -37,9 +37,9 @@ public class EnemyMovement : GroundDetectionEntity
 
     private void FollowPlayer()
     {
-        if ((playerTransform.position - transform.position).magnitude > 7) return;
+        if ((_playerTransform.position - transform.position).magnitude > 7) return;
         
-        float delX = (playerTransform.position.x - transform.position.x);
+        float delX = _playerTransform.position.x - transform.position.x;
         Vector2 movementDirection = Mathf.Sign(delX) * Vector2.right;
         _enemyBody.AddForce(movementDirection * force, ForceMode2D.Impulse);
     }
@@ -86,11 +86,5 @@ public class EnemyMovement : GroundDetectionEntity
         {
             collision.gameObject.GetComponent<PlayerHealth>().Damage(contactDamage, true);
         }
-    }
-
-    public void InitializeEnemy(Transform playerForm, GameHandler gameHandler)
-    {
-        playerTransform = playerForm;
-        _gameHandler = gameHandler;
     }
 }

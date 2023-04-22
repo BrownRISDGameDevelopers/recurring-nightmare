@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6276679987578424855}
   - component: {fileID: 6276679987578424854}
   - component: {fileID: 6276679987578424853}
+  - component: {fileID: 2098691843}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -105,6 +106,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2098691843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276679987578424851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c981493f72f7474889ba0f89488c7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerTextObj: {fileID: 6276679987681670693}
+  startTextObj: {fileID: 6276679988955919376}
+  endTextObj: {fileID: 6276679987597126610}
 --- !u!1 &6276679987597126610
 GameObject:
   m_ObjectHideFlags: 0
