@@ -12,7 +12,7 @@ public class EnemyMovement : GroundDetectionEntity
     [SerializeField] private float maxVelocity;
     [SerializeField] private float collisionTimeThreshold;
     // [SerializeField] private float speed = 0.05f;
-    [SerializeField] private float damage = 2f;
+    [FormerlySerializedAs("damage")] [SerializeField] private float contactDamage = 2f;
     [SerializeField] private GameHandler _gameHandler;
 
     private Rigidbody2D _enemyBody;
@@ -84,7 +84,7 @@ public class EnemyMovement : GroundDetectionEntity
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerHealth>().Damage(damage, true);
+            collision.gameObject.GetComponent<PlayerHealth>().Damage(contactDamage, true);
         }
     }
 
