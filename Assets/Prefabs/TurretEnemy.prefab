@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5802292706095346101}
   - component: {fileID: 5802292706095346102}
   - component: {fileID: 5802292706095346103}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TurretEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,11 +117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7091396654622573328, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.32
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7091396654622573328, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.74
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 7091396654622573328, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
       propertyPath: m_LocalPosition.z
@@ -155,9 +155,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7091396654622573329, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
+      propertyPath: m_Color.b
+      value: 0.19698583
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091396654622573329, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
+      propertyPath: m_Color.g
+      value: 0.19698583
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091396654622573329, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
     - target: {fileID: 7091396654622573330, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
       propertyPath: m_Name
       value: Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091396654622573330, guid: 0e8d578b99d49284783eb05180889d07, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e8d578b99d49284783eb05180889d07, type: 3}

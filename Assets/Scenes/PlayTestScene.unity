@@ -1632,6 +1632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6189921346760467122, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6436364020136864312, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: gameHandler
       value: 
@@ -3157,6 +3161,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6276679987578424855, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1773000317}
+    - target: {fileID: 6276679987578424855, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6276679988743210075, guid: ca3338b799afe469181ec374b44f272e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3371,10 +3383,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1341703330}
     m_Modifications:
-    - target: {fileID: 5802292704817555105, guid: c9e8407abd699ca49ba911de6bbefdf5, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5802292706095346096, guid: c9e8407abd699ca49ba911de6bbefdf5, type: 3}
       propertyPath: m_Name
       value: TurretEnemy

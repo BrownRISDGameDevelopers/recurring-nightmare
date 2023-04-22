@@ -14,7 +14,7 @@ public class TurretEnemy : MonoBehaviour
     [SerializeField] private float range = 20f;
 
     private const int PoolSize = 10;
-    private List<GameObject> _projectilePool = new List<GameObject>();
+    private readonly List<GameObject> _projectilePool = new List<GameObject>();
 
     private float _shootingTimer = 0f; // When the enemy should shoot
     private Vector2 _targetDirection;
@@ -23,9 +23,9 @@ public class TurretEnemy : MonoBehaviour
     {
         for (int i = 0; i < PoolSize; i++)
         {
-            GameObject obj = Instantiate(projectileObject, gameObject.transform);
-            obj.SetActive(false);
-            _projectilePool.Add(obj);
+            var tmp = Instantiate(projectileObject, gameObject.transform);
+            tmp.SetActive(false);
+            _projectilePool.Add(tmp);
         }
     }
 
@@ -59,8 +59,11 @@ public class TurretEnemy : MonoBehaviour
     {
         // Create projectile game object
         var projectile = _projectilePool.Find(projectile => !projectile.activeInHierarchy);
-        projectile.transform.position = gameObject.transform.position;
-        projectile.transform.LookAt(targetTransform);
+        var turretPosition = transform.position;
+        
+        projectile.transform.position = turretPosition;
+        projectile.transform.right = targetTransform.position - turretPosition;
+        projectile.SetActive(true);
         projectile.GetComponent<Rigidbody2D>().velocity = _targetDirection * projectileSpeed;
     }
 }
