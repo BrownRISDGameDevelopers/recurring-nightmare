@@ -1,36 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class EnemySpawner : MonoBehaviour
 {
-
-    [SerializeField] private GameHandler _gameHandler;
-    [SerializeField] private Transform _playerTransform;
     // The Enemy prefab that should be spawned.
     // [SerializeField] private GameObject _enemy;
     // How many seconds between spawns.
-    [SerializeField] private float _spawnTime = 10f;
-    [SerializeField] private bool _spawnOnStart = false;
+    [FormerlySerializedAs("_spawnTime")] [SerializeField] private float spawnTime = 10f;
     private float _timeToNextSpawn;
     // How many Enemies can be spawned at this point at a time.
-    [SerializeField] private int _maxEnemies = 1;
-    [SerializeField] private List<Vector3> enemy_positions;
-    [SerializeField] private List<int> enemy_ID;
+    [FormerlySerializedAs("_maxEnemies")] [SerializeField] private int maxEnemies = 1;
+    [FormerlySerializedAs("enemy_positions")] [SerializeField] private List<Vector3> enemyPositions;
+    [FormerlySerializedAs("enemy_ID")] [SerializeField] private List<int> enemyID;
     [SerializeField] private List<GameObject> enemyPrefabList;
     [SerializeField] private bool hasSpawned = false;
 
-    void Start()
-    {
-        // if (_spawnOnStart) SpawnEnemy();
-        // else _timeToNextSpawn = _spawnTime;
-    }
-    
     void Update()
     {
         // If there are less Enemies than the max amount, spawn a new one.
-        if (transform.childCount < _maxEnemies)
+        if (transform.childCount < maxEnemies)
         {
             _timeToNextSpawn -= Time.deltaTime;
             if (_timeToNextSpawn <= 0)
@@ -44,19 +35,17 @@ public class EnemySpawner : MonoBehaviour
     {
         Debug.Log("Enemy has been spawned.");
         // Make the Enemy as child of this EnemySpawner.
-        int enemy_id = enemy_ID[index];
-        GameObject enemy = Instantiate(enemyPrefabList[enemy_id]);
-        enemy.transform.position = enemy_positions[index];
-        enemy.transform.parent = transform;
-        enemy.GetComponent<EnemyMovement>().InitializeEnemy(_playerTransform, _gameHandler);
+        int enemyID = this.enemyID[index];
+        GameObject enemy = Instantiate(enemyPrefabList[enemyID], transform, true);
+        enemy.transform.position = enemyPositions[index];
         enemy.SetActive(true);
-        _timeToNextSpawn = _spawnTime;
+        _timeToNextSpawn = spawnTime;
     }
 
     private void SpawnEnemies()
     {
         Debug.Log("spawner activated looping through enemy list");
-        for (int i = 0; i < enemy_ID.Count; i++){
+        for (int i = 0; i < enemyID.Count; i++){
             SpawnOneEnemy(i);
         } 
         hasSpawned = true;
@@ -66,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Enemy spawner collision detected");
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.SendMessage("ApplyDamage", 10);
         }
@@ -80,6 +69,4 @@ public class EnemySpawner : MonoBehaviour
         }
         
     }
-
-    
 }

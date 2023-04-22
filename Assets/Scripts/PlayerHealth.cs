@@ -9,7 +9,6 @@ using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
-	[SerializeField] private GameHandler gameHandler;
 	[SerializeField] private Slider hpSlider;
 	
 	[Header("Player Health")] 
@@ -21,15 +20,32 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float remainingImmuneTime;
 	[SerializeField] private bool isImmune;
 	[SerializeField] private float playerHealth;
+
+	private static PlayerHealth _instance;
+
+	// Start is called before the first frame update
+	void Start()
+	{
+		DontDestroyOnLoad(gameObject);
+		playerHealth = maxPlayerHealth;
+		
+		// Player starts off immune. We can change this.
+		hpSlider.maxValue = maxPlayerHealth;
+		hpSlider.value = playerHealth;
+	}
 	
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+	    if (_instance == null)
+	    {
+		    _instance = this;
+		    DontDestroyOnLoad(gameObject);
+	    }
+	    else
+	    {
+		    Destroy(gameObject);
+	    }
 	    MakeImmune(immuneTimeAtGameStart);
-	    // Player starts off immune. We can change this.
-        playerHealth = maxPlayerHealth;
-        hpSlider.maxValue = maxPlayerHealth;
-        hpSlider.value = maxPlayerHealth;
     }
 
     void Update()
@@ -72,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
 		playerHealth -= damageAmount;
 		if (playerHealth <= 0)
 		{
-			gameHandler.EndGame("Game Over");
+			GameHandler.EndGameAsDefeat();
 			playerHealth = 0;
 		}
 		

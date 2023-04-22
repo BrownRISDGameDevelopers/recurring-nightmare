@@ -16,9 +16,7 @@ public class PlayerMovement : GroundDetectionEntity
     [SerializeField] private float maxJumpTime = 0.5f;
     [SerializeField] private float jumpAcceleration = 5f;
     [SerializeField] private float airMovementMultiplier = 0.5f; // horizontal force weaker if in air
-
-    [SerializeField] private GameHandler _gameHandler;
-
+    
     private PlayerInputActions _inputActions;
     private bool _isOnGround;
     private bool _pressedJumpPrevFrame = false;
@@ -34,7 +32,7 @@ public class PlayerMovement : GroundDetectionEntity
 
     private void FixedUpdate()
     {
-        if (_gameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
         
         (_isOnGround, _) = CheckOnGround();
         GetHorizontalInput();

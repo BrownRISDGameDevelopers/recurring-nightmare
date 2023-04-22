@@ -7,8 +7,6 @@ using UnityEngine.Serialization;
 public class TurretEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject projectileObject;
-    [SerializeField] private GameHandler gameHandler;
-    [SerializeField] private Transform targetTransform; // Transform of the target
     
     [Header("Attack Behavior")]
     [SerializeField] private float shootingInterval = 1.0f; // Interval between each projectile
@@ -17,13 +15,15 @@ public class TurretEnemy : MonoBehaviour
     [SerializeField] private float contactDamage = 2f;
 
     private const int PoolSize = 10;
-    private readonly List<GameObject> _projectilePool = new List<GameObject>();
+    private readonly List<GameObject> _projectilePool = new();
 
     private float _shootingTimer = 0f; // When the enemy should shoot
     private Vector2 _targetDirection;
+    private Transform _targetTransform;
 
     private void Start()
     {
+        _targetTransform = GameHandler.Player.transform;
         for (int i = 0; i < PoolSize; i++)
         {
             var tmp = Instantiate(projectileObject, gameObject.transform);
@@ -35,7 +35,7 @@ public class TurretEnemy : MonoBehaviour
     private bool HasLineOfSight()
     {
         var position = gameObject.transform.position;
-        _targetDirection = (targetTransform.position - position).normalized;
+        _targetDirection = (_targetTransform.position - position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(position, _targetDirection);
 
         if (hit.collider == null || !hit.collider.CompareTag("Player"))
@@ -49,7 +49,7 @@ public class TurretEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameHandler.GameState != GameHandler.RunningState.Running) return;
+        if (GameHandler.GameState != GameHandler.RunningState.Running) return;
 
         _shootingTimer += Time.deltaTime;
         if (_shootingTimer < shootingInterval || !HasLineOfSight()) return;
@@ -65,7 +65,7 @@ public class TurretEnemy : MonoBehaviour
         var turretPosition = transform.position;
         
         projectile.transform.position = turretPosition;
-        projectile.transform.right = targetTransform.position - turretPosition;
+        projectile.transform.right = _targetTransform.position - turretPosition;
         projectile.SetActive(true);
         projectile.GetComponent<Rigidbody2D>().velocity = _targetDirection * projectileSpeed;
     }

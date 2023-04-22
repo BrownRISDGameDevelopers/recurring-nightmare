@@ -9,7 +9,6 @@ public class CameraMovement : MonoBehaviour
     // NOTE: This is pretty messy and needs to be cleaned up.
     
     [SerializeField] private Camera cam;
-    [SerializeField] private Transform playerTransform;
     
     // Type of camera movement.
     // stationary camera doesn't move.
@@ -27,19 +26,23 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Vector2 minViewPortSize = new Vector2(-30.0f, -5.0f);
     [SerializeField] private Vector2 maxViewPortSize = new Vector2(30.0f, 25.0f);
 
-    private float cameraHeight;
-    private float cameraWidth;
+    private float _cameraHeight;
+    private float _cameraWidth;
     
-    private float cameraBoundY;
-    private float cameraBoundX;
+    private float _cameraBoundY;
+    private float _cameraBoundX;
 
+    private Transform _playerTransform;
+    
 void Start()
-    {
-        cameraHeight = cam.orthographicSize;
-        cameraWidth = cameraHeight * cam.aspect;
-        cameraBoundY = cameraHeight * maxDeviationY;
-        cameraBoundX = cameraWidth * maxDeviationX;
-    }
+{
+    _playerTransform = GameHandler.Player.transform;
+        
+    _cameraHeight = cam.orthographicSize;
+    _cameraWidth = _cameraHeight * cam.aspect;
+    _cameraBoundY = _cameraHeight * maxDeviationY;
+    _cameraBoundX = _cameraWidth * maxDeviationX;
+}
 
     void LateUpdate()
     {
@@ -59,22 +62,22 @@ void Start()
             cam.transform.position.z);
 
         // Calculate difference between player and camera position.
-        float deviationY = playerTransform.position.y - cam.transform.position.y;
-        float deviationX = playerTransform.position.x - cam.transform.position.x;
+        float deviationY = _playerTransform.position.y - cam.transform.position.y;
+        float deviationX = _playerTransform.position.x - cam.transform.position.x;
         
         // If player is out of camera bound,
         // correct cam so that player is just on the bound.
-        if (deviationY > cameraBoundY) {
-            newCameraPosition.y += deviationY - cameraBoundY;
-        } else if (deviationY < -cameraBoundY) {
-            newCameraPosition.y += deviationY + cameraBoundY;
+        if (deviationY > _cameraBoundY) {
+            newCameraPosition.y += deviationY - _cameraBoundY;
+        } else if (deviationY < -_cameraBoundY) {
+            newCameraPosition.y += deviationY + _cameraBoundY;
         }
-        if (deviationX > cameraBoundX) {
-            newCameraPosition.x += deviationX - cameraBoundX;
-        } else if (deviationX < -cameraBoundX) {
-            newCameraPosition.x += deviationX + cameraBoundX;
+        if (deviationX > _cameraBoundX) {
+            newCameraPosition.x += deviationX - _cameraBoundX;
+        } else if (deviationX < -_cameraBoundX) {
+            newCameraPosition.x += deviationX + _cameraBoundX;
         }
-
+        
         if(newCameraPosition.y < minViewPortSize.y) {
             newCameraPosition.y = minViewPortSize.y;
         } else if(newCameraPosition.y > maxViewPortSize.y) {
@@ -94,7 +97,7 @@ void Start()
     void cameraUpdateCentered()
     {
         // Move camera to player's position, but keep original z value.
-        Vector3 newCameraPosition = new Vector3(playerTransform.position.x, playerTransform.position.y,
+        Vector3 newCameraPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y,
             cam.transform.position.z);
 
         if (newCameraPosition.y < minViewPortSize.y)
