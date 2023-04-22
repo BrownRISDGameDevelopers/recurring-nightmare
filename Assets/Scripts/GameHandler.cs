@@ -29,6 +29,7 @@ public static class GameHandler
         GameState = RunningState.GameOver;
 
         SceneManager.LoadScene(_isNight ? "SeongHeonScene" : "PlayTestScene");
+        _isNight = !_isNight;
 
         GameState = RunningState.NotYetStarted;
         RemainingTime = TotalTime;
