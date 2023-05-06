@@ -99,9 +99,12 @@ public class PlayerHealth : MonoBehaviour
 		}
 	}
 	
-	public void Heal(float healAmount)
+	public bool Heal(float healAmount)
 	{
 		Assert.IsFalse(float.IsNaN(healAmount));
+		if (playerHealth >= maxPlayerHealth) return false;
+		
 		playerHealth = Mathf.Min(playerHealth + healAmount, maxPlayerHealth);
+		return true;
 	}
 }

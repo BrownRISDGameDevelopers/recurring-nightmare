@@ -32,7 +32,9 @@ public class InventorySlot : MonoBehaviour
 
     public void Use()
     {
-        _playerHealth.Heal(_healValue);
+        // If the player is at full health, don't heal them
+        if (!_playerHealth.Heal(_healValue)) return;
+        
         _healValue = float.NaN;
         IsEmpty = true;
         _image.enabled = false;
