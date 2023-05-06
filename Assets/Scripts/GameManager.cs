@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+
 public static class GameManager
 {
+    private static readonly Vector2 DayDefaultPos = new Vector2(-30, -8);
+
     public enum RunningState
     {
         NotYetStarted = 0,
@@ -12,11 +15,15 @@ public static class GameManager
         GameOver = -1,
     }
     
-    private const float TotalTime = 30f;
+    private const float TotalTime = 5f;
     private static bool _isNight = true;
 
     public static float RemainingTime = TotalTime;
     public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
+    
+    private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
+    private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+    
     public static RunningState GameState = RunningState.NotYetStarted;
     
     public static void EndGameAsDefeat()
@@ -24,13 +31,29 @@ public static class GameManager
         GameState = RunningState.GameOver;
     }
 
-    public static void EndGameAsWin()
+    public static void EndRoundAsWin()
+    {
+        SwitchTimeOfDay(_isNight);
+        _isNight = !_isNight;
+    }
+
+    private static void SwitchTimeOfDay(bool isSwitchingToDay)
     {
         GameState = RunningState.GameOver;
+        
+        Player.transform.position = DayDefaultPos;
+        Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        
+        foreach (var pack in Healthpacks)
+        {
+            pack.SetActive(isSwitchingToDay);
+        }
 
-        SceneManager.LoadScene(_isNight ? "SeongHeonScene" : "PlayTestScene");
-        _isNight = !_isNight;
-
+        foreach (var spawner in EnemySpawners)
+        {
+            spawner.SetActive(isSwitchingToDay);
+        }
+        
         GameState = RunningState.NotYetStarted;
         RemainingTime = TotalTime;
     }
