@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
@@ -98,11 +99,11 @@ public class PlayerHealth : MonoBehaviour
 		}
 	}
 	
-	// Returns true if player received heal (doesn't need to be full heal), otherwise false 
 	public bool Heal(float healAmount)
 	{
-		if (Mathf.Approximately(playerHealth, maxPlayerHealth)) return false;
-
+		Assert.IsFalse(float.IsNaN(healAmount));
+		if (playerHealth >= maxPlayerHealth) return false;
+		
 		playerHealth = Mathf.Min(playerHealth + healAmount, maxPlayerHealth);
 		return true;
 	}
