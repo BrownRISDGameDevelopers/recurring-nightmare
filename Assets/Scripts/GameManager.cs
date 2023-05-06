@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public static class GameManager
 {
-    private static readonly Vector2 DayDefaultPos = new Vector2(-30, -8);
+    private static readonly Vector3 DefaultPos = new Vector3(-30, -8, -5);
 
     public enum RunningState
     {
@@ -15,7 +15,7 @@ public static class GameManager
         GameOver = -1,
     }
     
-    private const float TotalTime = 5f;
+    private const float TotalTime = 60f;
     private static bool _isNight = true;
 
     public static float RemainingTime = TotalTime;
@@ -41,7 +41,7 @@ public static class GameManager
     {
         GameState = RunningState.GameOver;
         
-        Player.transform.position = DayDefaultPos;
+        Player.transform.position = DefaultPos;
         Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         
         foreach (var pack in Healthpacks)

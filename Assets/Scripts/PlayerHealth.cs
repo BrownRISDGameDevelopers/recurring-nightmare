@@ -21,9 +21,7 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float remainingImmuneTime;
 	[SerializeField] private bool isImmune;
 	[SerializeField] private float playerHealth;
-
-	private static PlayerHealth _instance;
-
+	
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -37,15 +35,6 @@ public class PlayerHealth : MonoBehaviour
 	
     void Awake()
     {
-	    if (_instance == null)
-	    {
-		    _instance = this;
-		    DontDestroyOnLoad(gameObject);
-	    }
-	    else
-	    {
-		    Destroy(gameObject);
-	    }
 	    MakeImmune(immuneTimeAtGameStart);
     }
 
