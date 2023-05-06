@@ -8,7 +8,7 @@ public class PlayerMovement : GroundDetectionEntity
 {
     [SerializeField] private Rigidbody2D playerBody;
     [SerializeField] private float movementMagnitude = 5f;
-    [SerializeField] private float maxHorizontalSpeed = 3f;
+    [SerializeField] private float maxHorizontalSpeed = 8f;
 
     [Header("Jump related variables")] 
     [SerializeField] private float jumpMagnitude = 200f;
