@@ -21,7 +21,12 @@ public class PlayerMovement : GroundDetectionEntity
     private bool _isOnGround;
     private bool _pressedJumpPrevFrame = false;
     private float _startJumpTime;
-    
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource runningAudioSource;
+    [SerializeField] private AudioSource jumpInitiateAudioSource;
+    [SerializeField] private AudioSource jumpImpactAudioSource;
+
     protected override void Awake()
     {
         _inputActions = new PlayerInputActions();
@@ -33,7 +38,9 @@ public class PlayerMovement : GroundDetectionEntity
     private void FixedUpdate()
     {
         if (GameManager.GameState != GameManager.RunningState.Running) return;
+        bool previousOnGround = _isOnGround;
         (_isOnGround, _) = CheckOnGround();
+        if (!previousOnGround && _isOnGround) jumpImpactAudioSource.Play();
         GetHorizontalInput();
         GetJumpInput();
         CapHorizontalSpeed();
@@ -52,10 +59,14 @@ public class PlayerMovement : GroundDetectionEntity
         
         // We don't want vertical movement to be handled by 'W' and 'S', so we set y to 0.
         direction.y = 0;
-        
+
+        if (direction.x != 0 && !runningAudioSource.isPlaying) runningAudioSource.Play();
+        else if (direction.x == 0) runningAudioSource.Stop();
+
         if (!_isOnGround)
         {
             direction *= airMovementMultiplier;
+            runningAudioSource.Stop();
         }
         
         playerBody.AddForce(direction * movementMagnitude);
@@ -74,6 +85,7 @@ public class PlayerMovement : GroundDetectionEntity
             {
                 _startJumpTime = Time.time;
                 playerBody.AddForce(Vector2.up * jumpMagnitude);
+                jumpInitiateAudioSource.Play();
             }
             else if (IsBelowMaxJump()) 
             {
@@ -87,5 +99,10 @@ public class PlayerMovement : GroundDetectionEntity
     private bool IsBelowMaxJump()
     {
         return Time.time - _startJumpTime < maxJumpTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }
