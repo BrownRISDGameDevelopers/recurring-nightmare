@@ -1553,59 +1553,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: 3.31426
+      value: 1.330823
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: -9.018926
+      value: -9.22993
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
-      value: 4.241907
+      value: 2.8914819
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
-      value: -12.792703
+      value: -9.247836
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
-      value: 6.702862
+      value: 4.8038263
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
-      value: -12.777644
+      value: -8.684167
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].x
-      value: 8.271557
+      value: 5.6973085
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].y
-      value: -12.609507
+      value: -7.883018
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[7].x
-      value: 8.375881
+      value: 6.6878495
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[7].y
-      value: -9.8025055
+      value: -5.7934303
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].x
-      value: 12.285643
+      value: 6.630737
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].y
-      value: -9.112679
+      value: -3.4577727
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[9].x
-      value: 12.16403
+      value: 4.3568845
       objectReference: {fileID: 0}
     - target: {fileID: 2464054968997895153, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[9].y
-      value: 1.4606199
+      value: 0.19459629
       objectReference: {fileID: 0}
     - target: {fileID: 3621484393713525365, guid: 9c5e48bde4c44b74989ecb8d774b0cae, type: 3}
       propertyPath: m_RootOrder
@@ -2561,7 +2561,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1773000318}
   - component: {fileID: 1773000317}
-  - component: {fileID: 1773000316}
   - component: {fileID: 1773000319}
   m_Layer: 0
   m_Name: Main Camera
@@ -2570,14 +2569,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1773000316
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773000315}
-  m_Enabled: 1
 --- !u!20 &1773000317
 Camera:
   m_ObjectHideFlags: 0
