@@ -4336,18 +4336,6 @@ PrefabInstance:
       propertyPath: items.Array.data[2]
       value: 
       objectReference: {fileID: 2047249679}
-    - target: {fileID: 6264852526071740981, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6264852526071740981, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 29fe382550e73d742bb8fc3b1eb3014f, type: 3}
-    - target: {fileID: 6264852526071740981, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8325447302627404449, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: hpSlider
       value: 
@@ -6975,11 +6963,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!82 &981208942 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 6264852526071740981, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
-  m_PrefabInstance: {fileID: 679684744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &986180124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15630,10 +15613,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 799207275971302014, guid: 391d4283d0ce0a04680d02a1e61cb51d, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 981208942}
     - target: {fileID: 799207275971302015, guid: 391d4283d0ce0a04680d02a1e61cb51d, type: 3}
       propertyPath: m_Name
       value: MusicManager
