@@ -20,7 +20,7 @@ public static class GameManager
 
     public static float RemainingTime = TotalTime;
     public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
-    
+
     private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
     private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
     
@@ -43,6 +43,9 @@ public static class GameManager
         
         Player.transform.position = DefaultPos;
         Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        if (isSwitchingToDay) MusicManager.Instance.PlayDaytimeMusic();
+        else MusicManager.Instance.PlayNightmareMusic();
         
         foreach (var pack in Healthpacks)
         {
