@@ -21,6 +21,10 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float remainingImmuneTime;
 	[SerializeField] private bool isImmune;
 	[SerializeField] private float playerHealth;
+
+	[Header("Audio")]
+	[SerializeField] private AudioSource hurtAudioSource;
+	[SerializeField] private AudioSource healingAudioSource;
 	
 	// Start is called before the first frame update
 	void Start()
@@ -86,6 +90,8 @@ public class PlayerHealth : MonoBehaviour
 		{
 			MakeImmune(immuneTimeAtDamage);
 		}
+
+		hurtAudioSource.PlayOneShot(hurtAudioSource.clip);
 	}
 	
 	public bool Heal(float healAmount)
@@ -94,6 +100,9 @@ public class PlayerHealth : MonoBehaviour
 		if (playerHealth >= maxPlayerHealth) return false;
 		
 		playerHealth = Mathf.Min(playerHealth + healAmount, maxPlayerHealth);
+
+		healingAudioSource.PlayOneShot(healingAudioSource.clip);
+
 		return true;
 	}
 }
