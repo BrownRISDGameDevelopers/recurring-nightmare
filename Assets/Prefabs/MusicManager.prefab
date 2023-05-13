@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   daytimeAudioClip: {fileID: 8300000, guid: 01e6d4b47f6092247b2b5693342525ac, type: 3}
   nightmareAudioClip: {fileID: 8300000, guid: 29fe382550e73d742bb8fc3b1eb3014f, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 6264852526071740981, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
