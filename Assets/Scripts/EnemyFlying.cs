@@ -46,8 +46,8 @@ public class EnemyFlying : MonoBehaviour
         Debug.Log("start track called");
         track = true;
         idleAudioSource.Stop();
-        alertedAudioSource.Play();
-        agitatedAudioSouece.Play();
+        alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
+        agitatedAudioSouece.PlayScheduled(AudioSettings.dspTime + 1);
     }
 
     void stopTrack()

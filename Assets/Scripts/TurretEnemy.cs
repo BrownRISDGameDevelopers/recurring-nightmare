@@ -68,7 +68,8 @@ public class TurretEnemy : MonoBehaviour
         else if(!previousHasLineOfSight && _hasLineofSight)
         {
             idleAudioSource.Stop();
-            agitatedAudioSource.Play();
+            alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
+            agitatedAudioSource.PlayScheduled(AudioSettings.dspTime + 1);
         }
 
         _shootingTimer += Time.deltaTime;
