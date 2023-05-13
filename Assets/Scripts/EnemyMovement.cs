@@ -14,7 +14,7 @@ public class EnemyMovement : GroundDetectionEntity
     [FormerlySerializedAs("damage")] [SerializeField] private float contactDamage = 2f;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource idleAudioSource;
+    [SerializeField] private AudioSwitcher idleAudioSwitcher;
     [SerializeField] private AudioSource alertedAudioSource;
     [SerializeField] private AudioSource agitatedAudioSource;
 
@@ -49,7 +49,7 @@ public class EnemyMovement : GroundDetectionEntity
             if(_isFollowing)
             {
                 agitatedAudioSource.Stop();
-                idleAudioSource.Play();
+                idleAudioSwitcher.Play();
             }
             _isFollowing = false;
             return;
@@ -57,7 +57,7 @@ public class EnemyMovement : GroundDetectionEntity
 
         if(!_isFollowing)
         {
-            idleAudioSource.Stop();
+            idleAudioSwitcher.Stop();
             alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
             agitatedAudioSource.PlayScheduled(AudioSettings.dspTime + 1);
         }

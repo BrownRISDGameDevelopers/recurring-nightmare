@@ -10,8 +10,8 @@ public class EnemyFlying : MonoBehaviour
     GameObject target = null;
     bool track = false;
 
-    [SerializeField] AudioSource idleAudioSource;
-    [SerializeField] AudioSource agitatedAudioSouece;
+    [SerializeField] AudioSwitcher idleAudioSwitcher;
+    [SerializeField] AudioSwitcher agitatedAudioSwitcher;
     [SerializeField] AudioSource alertedAudioSource;
 
     // Start is called before the first frame update
@@ -45,9 +45,9 @@ public class EnemyFlying : MonoBehaviour
     {
         Debug.Log("start track called");
         track = true;
-        idleAudioSource.Stop();
+        idleAudioSwitcher.Stop();
         alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
-        agitatedAudioSouece.PlayScheduled(AudioSettings.dspTime + 1);
+        agitatedAudioSwitcher.PlayScheduled(AudioSettings.dspTime + 1);
     }
 
     void stopTrack()
@@ -55,8 +55,8 @@ public class EnemyFlying : MonoBehaviour
         Debug.Log("stop track called");
         track = false;
         agent.SetDestination(basePosition);  // Heading to base
-        agitatedAudioSouece.Stop();
-        idleAudioSource.Play();
+        agitatedAudioSwitcher.Stop();
+        idleAudioSwitcher.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

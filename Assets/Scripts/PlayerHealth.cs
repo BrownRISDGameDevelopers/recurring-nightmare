@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float playerHealth;
 
 	[Header("Audio")]
-	[SerializeField] private AudioSource hurtAudioSource;
+	[SerializeField] private AudioSwitcher hurtAudioSwitcher;
 	[SerializeField] private AudioSource healingAudioSource;
 	
 	// Start is called before the first frame update
@@ -91,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
 			MakeImmune(immuneTimeAtDamage);
 		}
 
-		hurtAudioSource.PlayOneShot(hurtAudioSource.clip);
+		hurtAudioSwitcher.Play();
 	}
 	
 	public bool Heal(float healAmount)
