@@ -14,12 +14,19 @@ public class TurretEnemy : MonoBehaviour
     [FormerlySerializedAs("range")] [SerializeField] private float visionRange = 20f;
     [SerializeField] private float contactDamage = 2f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource idleAudioSource;
+    [SerializeField] private AudioSource alertedAudioSource;
+    [SerializeField] private AudioSource agitatedAudioSource;
+
     private const int PoolSize = 10;
     private readonly List<GameObject> _projectilePool = new();
 
     private float _shootingTimer = 0f; // When the enemy should shoot
     private Vector2 _targetDirection;
     private Transform _targetTransform;
+
+    bool _hasLineofSight = false;
 
     private void Start()
     {
@@ -51,8 +58,22 @@ public class TurretEnemy : MonoBehaviour
     {
         if (GameManager.GameState != GameManager.RunningState.Running) return;
 
+        bool previousHasLineOfSight = _hasLineofSight;
+        _hasLineofSight = HasLineOfSight();
+        if(previousHasLineOfSight && !_hasLineofSight)
+        {
+            agitatedAudioSource.Stop();
+            idleAudioSource.Play();
+        }
+        else if(!previousHasLineOfSight && _hasLineofSight)
+        {
+            idleAudioSource.Stop();
+            alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
+            agitatedAudioSource.PlayScheduled(AudioSettings.dspTime + 1);
+        }
+
         _shootingTimer += Time.deltaTime;
-        if (_shootingTimer < shootingInterval || !HasLineOfSight()) return;
+        if (_shootingTimer < shootingInterval || !_hasLineofSight) return;
 
         Shoot();
         _shootingTimer = 0f;

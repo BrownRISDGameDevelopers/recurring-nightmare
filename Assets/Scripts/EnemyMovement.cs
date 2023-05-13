@@ -13,9 +13,16 @@ public class EnemyMovement : GroundDetectionEntity
     // [SerializeField] private float speed = 0.05f;
     [FormerlySerializedAs("damage")] [SerializeField] private float contactDamage = 2f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource idleAudioSource;
+    [SerializeField] private AudioSource alertedAudioSource;
+    [SerializeField] private AudioSource agitatedAudioSource;
+
     private Rigidbody2D _enemyBody;
     private bool _isOnGround;
     private Transform _playerTransform;
+
+    private bool _isFollowing = false;
 
     protected override void Awake() 
     {
@@ -37,11 +44,28 @@ public class EnemyMovement : GroundDetectionEntity
 
     private void FollowPlayer()
     {
-        if ((_playerTransform.position - transform.position).magnitude > 7) return;
+        if ((_playerTransform.position - transform.position).magnitude > 7)
+        {
+            if(_isFollowing)
+            {
+                agitatedAudioSource.Stop();
+                idleAudioSource.Play();
+            }
+            _isFollowing = false;
+            return;
+        }
+
+        if(!_isFollowing)
+        {
+            idleAudioSource.Stop();
+            alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
+            agitatedAudioSource.PlayScheduled(AudioSettings.dspTime + 1);
+        }
         
         float delX = _playerTransform.position.x - transform.position.x;
         Vector2 movementDirection = Mathf.Sign(delX) * Vector2.right;
         _enemyBody.AddForce(movementDirection * force, ForceMode2D.Impulse);
+        _isFollowing = true;
     }
 
     private void ClampVelocity()
