@@ -37,7 +37,7 @@ RectTransform:
   - {fileID: 6276679988955919377}
   - {fileID: 6276679987597126613}
   - {fileID: 6276679987954921187}
-  - {fileID: 5905380462311410272}
+  - {fileID: 3317391362748926437}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -610,6 +610,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6276679987578424852}
     m_Modifications:
+    - target: {fileID: 2335425343923251231, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335425343923251231, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6887276077777857434, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -656,12 +664,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302135890325846134, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
       propertyPath: m_Name
-      value: Inventory
+      value: InventoryContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302135890325846134, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
---- !u!4 &5905380462311410272 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6887276077777857434, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
+--- !u!224 &3317391362748926437 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2335425343923251231, guid: 3b590d65330e5d04996de011bf53baf9, type: 3}
   m_PrefabInstance: {fileID: 1036009489312260602}
   m_PrefabAsset: {fileID: 0}

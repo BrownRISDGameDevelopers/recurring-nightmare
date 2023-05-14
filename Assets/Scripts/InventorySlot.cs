@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
@@ -19,6 +15,7 @@ public class InventorySlot : MonoBehaviour
         IsEmpty = true;
         _playerHealth = GameManager.Player.GetComponent<PlayerHealth>();
         _image = gameObject.GetComponent<Image>();
+        _image.enabled = false;
     }
 
     public void Fill(float healValue, Sprite sprite)
