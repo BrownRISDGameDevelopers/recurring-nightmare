@@ -27,6 +27,7 @@ public class InventorySlot : MonoBehaviour
         _healValue = healValue;
         _image.sprite = sprite;
         _image.enabled = true;
+        _image.SetNativeSize();
     }
 
     public void Use()
