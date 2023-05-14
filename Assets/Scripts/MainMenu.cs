@@ -1,37 +1,29 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*
- * Scene Indices
- * 0: Title Screen
- * 1: Instructions
- * 2: Credits
- * 3: Game!!
- */
-
 public class MainMenu : MonoBehaviour
 {
     public string newGameScene;
 
     public void NewGame()
     {
-        SceneManager.LoadScene(newGameScene);
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Game);
     }
 
     public void InstructionPage()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Instructions);
         //placeholder for instruction page
     }
 
     public void CreditsPage()
     {
-        //placeholder for credits page
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Credits);
     }
 
     public void TitlePage()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Title);
     }
 
     public void EndGame()

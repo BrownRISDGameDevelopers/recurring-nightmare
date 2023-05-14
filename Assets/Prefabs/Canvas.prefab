@@ -286,8 +286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c981493f72f7474889ba0f89488c7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 0}
+  timerText: {fileID: 8909167726206689364}
+  timerBackground: {fileID: 6276679988785279123}
   startTextObj: {fileID: 6276679988955919376}
+  dayBackground: {fileID: 21300000, guid: c773c383ef7d5e64abbd8682e5195f5c, type: 3}
+  nightBackground: {fileID: 21300000, guid: 769eb7616df7b794090dd37372d615a3, type: 3}
 --- !u!1 &6276679987597126610
 GameObject:
   m_ObjectHideFlags: 0
