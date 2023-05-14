@@ -9575,6 +9575,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &387765284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7725574156143860108, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+  m_PrefabInstance: {fileID: 1366080067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &405948284
 GameObject:
   m_ObjectHideFlags: 0
@@ -103302,6 +103307,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1675053286, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 387765284}
     - target: {fileID: 8325447302627404449, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: hpSlider
       value: 
