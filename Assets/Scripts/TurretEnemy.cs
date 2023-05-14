@@ -19,6 +19,9 @@ public class TurretEnemy : MonoBehaviour
     [SerializeField] private AudioSource alertedAudioSource;
     [SerializeField] private AudioSource agitatedAudioSource;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
     private const int PoolSize = 10;
     private readonly List<GameObject> _projectilePool = new();
 
@@ -62,11 +65,13 @@ public class TurretEnemy : MonoBehaviour
         _hasLineofSight = HasLineOfSight();
         if(previousHasLineOfSight && !_hasLineofSight)
         {
+            animator.SetBool("isAttacking", false);
             agitatedAudioSource.Stop();
             idleAudioSwitcher.Play();
         }
         else if(!previousHasLineOfSight && _hasLineofSight)
         {
+            animator.SetBool("isAttacking", true);
             idleAudioSwitcher.Stop();
             alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
             agitatedAudioSource.PlayScheduled(AudioSettings.dspTime + 1);
