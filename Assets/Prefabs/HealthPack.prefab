@@ -149,6 +149,6 @@ MonoBehaviour:
   healAmount: 5
   spawnInterval: 10
   sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 0a7db3e3ae4e2444eb9808037e0679ba, type: 3}
+  - {fileID: 21300000, guid: 9e30c51796aa88647bb70c5246c1d3a4, type: 3}
+  - {fileID: 21300000, guid: 3df1eed7d96451645a12e65855536950, type: 3}

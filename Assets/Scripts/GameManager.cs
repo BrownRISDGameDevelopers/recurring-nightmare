@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -19,11 +20,12 @@ public static class GameManager
     private static bool _isNight = true;
 
     public static float RemainingTime = TotalTime;
+    
     public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
-
     private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
     private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-    
+    private static readonly GameObject InventoryContainer = GameObject.Find("Inventory Container");
+
     public static RunningState GameState = RunningState.NotYetStarted;
     
     public static void EndGameAsDefeat()
@@ -46,6 +48,8 @@ public static class GameManager
 
         if (isSwitchingToDay) MusicManager.Instance.PlayDaytimeMusic();
         else MusicManager.Instance.PlayNightmareMusic();
+        
+        InventoryContainer.GetComponent<InventoryContainer>().ChangeSprite(isSwitchingToDay);
         
         foreach (var pack in Healthpacks)
         {
