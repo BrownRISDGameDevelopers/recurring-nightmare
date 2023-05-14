@@ -1,39 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+/*
+ * Scene Indices
+ * 0: Title Screen
+ * 1: Instructions
+ * 2: Credits
+ * 3: Game!!
+ */
 
 public class MainMenu : MonoBehaviour
 {
     public string newGameScene;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void newGame()
+    public void NewGame()
     {
         SceneManager.LoadScene(newGameScene);
     }
 
-    public void instructionPage()
+    public void InstructionPage()
     {
+        SceneManager.LoadScene(1);
         //placeholder for instruction page
     }
 
-    public void creditsPage()
+    public void CreditsPage()
     {
         //placeholder for credits page
     }
 
-    public void endGame()
+    public void TitlePage()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void EndGame()
     {
         Application.Quit();
     }
