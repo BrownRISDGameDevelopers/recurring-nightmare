@@ -19,20 +19,16 @@ public class EnemyMovement : GroundDetectionEntity
     [SerializeField] private AudioSwitcher idleAudioSwitcher;
     [SerializeField] private AudioSource alertedAudioSource;
     [SerializeField] private AudioSource agitatedAudioSource;
-
-    private LayerMask _groundMask;
-
+    
     private Rigidbody2D _enemyBody;
     private bool _isOnGround;
     private Transform _playerTransform;
 
     private bool _isFollowing = false;
-    private Vector2 movingDirection = Vector2.right;
+    private Vector2 _movingDirection = Vector2.right;
 
     protected override void Awake() 
     {
-        _groundMask = LayerMask.GetMask("Ground");
-
         _enemyBody = GetComponent<Rigidbody2D>();
         _playerTransform = GameManager.Player.transform;
         base.Awake();
@@ -44,14 +40,14 @@ public class EnemyMovement : GroundDetectionEntity
 
         // (_isOnGround, _) = CheckOnGround();
 
-        Collider2D enemyGround = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, _groundMask).collider;
-        Collider2D playerGround = Physics2D.Raycast(_playerTransform.position, Vector2.down, Mathf.Infinity, _groundMask).collider;
-        RaycastHit2D playerRaycast = Physics2D.Raycast(transform.position, (_playerTransform.position - transform.position).normalized, Mathf.Infinity, _groundMask);
+        Collider2D enemyGround = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, GroundMask).collider;
+        Collider2D playerGround = Physics2D.Raycast(_playerTransform.position, Vector2.down, Mathf.Infinity, GroundMask).collider;
+        RaycastHit2D playerRaycast = Physics2D.Raycast(transform.position, (_playerTransform.position - transform.position).normalized, Mathf.Infinity, GroundMask);
         RaycastHit2D horizontalGroundeRaycast;
-        RaycastHit2D verticalRaycast = Physics2D.Raycast(transform.position + new Vector3(movingDirection.x * boxCollider.size.x / 2, 0, 0), Vector2.down, Mathf.Infinity, _groundMask);
+        RaycastHit2D verticalRaycast = Physics2D.Raycast(transform.position + new Vector3(_movingDirection.x * boxCollider.size.x / 2, 0, 0), Vector2.down, Mathf.Infinity, GroundMask);
 
         if (!_isFollowing
-            && Mathf.Sign((_playerTransform.position - transform.position).x) * Mathf.Sign(movingDirection.x) > 0  // Same direction
+            && Mathf.Sign((_playerTransform.position - transform.position).x) * Mathf.Sign(_movingDirection.x) > 0  // Same direction
             && enemyGround == playerGround && Mathf.Abs(_playerTransform.position.y - transform.position.y) < 1  // Same platform
             && (playerRaycast.collider == null || playerRaycast.distance > Vector3.Distance(_playerTransform.position, transform.position))  // No obstacle
             && (verticalRaycast.collider != null && verticalRaycast.distance <= boxCollider.size.y / 2 + 0.1))
@@ -75,14 +71,14 @@ public class EnemyMovement : GroundDetectionEntity
         }
         else
         {
-            horizontalGroundeRaycast = Physics2D.Raycast(transform.position, movingDirection, Mathf.Infinity, _groundMask);
+            horizontalGroundeRaycast = Physics2D.Raycast(transform.position, _movingDirection, Mathf.Infinity, GroundMask);
             if ((horizontalGroundeRaycast.collider != null && horizontalGroundeRaycast.distance < boxCollider.size.y / 2 + 0.1) 
                 || (verticalRaycast.collider == null || verticalRaycast.distance > boxCollider.size.y / 2 + 0.1))
             {
-                movingDirection = -movingDirection;
+                _movingDirection = -_movingDirection;
                 _enemyBody.velocity = Vector2.zero;
             }
-            _enemyBody.AddForce(movingDirection * force, ForceMode2D.Impulse);
+            _enemyBody.AddForce(_movingDirection * force, ForceMode2D.Impulse);
             if (_isFollowing)
             {
                 agitatedAudioSource.Stop();
@@ -105,8 +101,8 @@ public class EnemyMovement : GroundDetectionEntity
         }
         
         float delX = _playerTransform.position.x - transform.position.x;
-        movingDirection = Mathf.Sign(delX) * Vector2.right;
-        _enemyBody.AddForce(movingDirection * force, ForceMode2D.Impulse);
+        _movingDirection = Mathf.Sign(delX) * Vector2.right;
+        _enemyBody.AddForce(_movingDirection * force, ForceMode2D.Impulse);
         _isFollowing = true;
     }
 

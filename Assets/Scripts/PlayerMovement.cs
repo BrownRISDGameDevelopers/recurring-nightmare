@@ -100,9 +100,4 @@ public class PlayerMovement : GroundDetectionEntity
     {
         return Time.time - _startJumpTime < maxJumpTime;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
 }

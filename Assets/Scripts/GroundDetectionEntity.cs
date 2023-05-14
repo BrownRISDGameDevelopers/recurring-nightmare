@@ -8,13 +8,13 @@ public abstract class GroundDetectionEntity : MonoBehaviour
 {
     [SerializeField] protected float groundDetectionSensitivity = 1e-3f;
 
-    private LayerMask _groundMask;
+    protected LayerMask GroundMask;
     private Vector2 _sideOffset;
     private Vector2 _heightOffset;
     
     protected virtual void Awake()
     {
-        _groundMask = LayerMask.GetMask("Ground");
+        GroundMask = LayerMask.GetMask("Ground");
         
         Vector2 size = transform.localScale;
         _sideOffset = new Vector2(size.x * 0.45f, 0);
@@ -28,9 +28,9 @@ public abstract class GroundDetectionEntity : MonoBehaviour
     
         return new List<RaycastHit2D>()
         {
-            Physics2D.Raycast(bottom + _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask),
-            Physics2D.Raycast(bottom - _sideOffset, Vector2.down, groundDetectionSensitivity, _groundMask),
-            Physics2D.Raycast(bottom, Vector2.down, groundDetectionSensitivity, _groundMask)
+            Physics2D.Raycast(bottom + _sideOffset, Vector2.down, groundDetectionSensitivity, GroundMask),
+            Physics2D.Raycast(bottom - _sideOffset, Vector2.down, groundDetectionSensitivity, GroundMask),
+            Physics2D.Raycast(bottom, Vector2.down, groundDetectionSensitivity, GroundMask)
         };
     }
 
