@@ -29,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		DontDestroyOnLoad(gameObject);
 		playerHealth = maxPlayerHealth;
 		
 		// Player starts off immune. We can change this.
