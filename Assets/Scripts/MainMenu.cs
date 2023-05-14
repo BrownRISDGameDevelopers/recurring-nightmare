@@ -1,39 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public string newGameScene;
-    // Start is called before the first frame update
-    void Start()
+
+    public void NewGame()
     {
-        
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Game);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InstructionPage()
     {
-        
-    }
-
-    public void newGame()
-    {
-        SceneManager.LoadScene(newGameScene);
-    }
-
-    public void instructionPage()
-    {
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Instructions);
         //placeholder for instruction page
     }
 
-    public void creditsPage()
+    public void CreditsPage()
     {
-        //placeholder for credits page
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Credits);
     }
 
-    public void endGame()
+    public void TitlePage()
+    {
+        SceneManager.LoadScene((int) GameManager.SceneIndexTable.Title);
+    }
+
+    public void EndGame()
     {
         Application.Quit();
     }

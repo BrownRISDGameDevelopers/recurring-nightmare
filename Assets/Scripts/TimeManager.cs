@@ -39,8 +39,8 @@ public class TimeManager : MonoBehaviour
         }
         else if (GameManager.GameState == GameManager.RunningState.NotYetStarted && Input.anyKey)
         {
-            GameManager.GameState = GameManager.RunningState.Running;
             startTextObj.SetActive(false);
+            GameManager.GameStart();
         }
     }
 

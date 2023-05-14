@@ -7,7 +7,11 @@ using UnityEngine.UI;
 
 public static class GameManager
 {
-    private static readonly Vector3 DefaultPos = new(-30, -8, -5);
+    [Header("Difficulty Settings")]
+    private const float TotalTime = 5f;
+    private const int NumNightsToWin = 1;
+    
+    private static readonly Vector3 DefaultPos = new(-7.3f, -15, -5);
 
     public enum RunningState
     {
@@ -16,28 +20,53 @@ public static class GameManager
         GameOver = -1,
     }
     
-    private const float TotalTime = 60f;
-    private static bool _isNight = true;
+    public enum SceneIndexTable
+    {
+        Title = 0,
+        Instructions = 1,
+        Credits = 2,
+        Game = 3,
+        Win = 4,
+        Defeat = 5
+    }
 
+    [Header("Initial Values")]
+    private static int _numNightsSurvived = 0;
+    private static bool _isNight = false;
     public static float RemainingTime = TotalTime;
+    public static RunningState GameState = RunningState.NotYetStarted;
+
     
     public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
+    
     private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
     private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
     private static readonly GameObject InventoryContainer = GameObject.Find("InventoryContainer");
     private static readonly GameObject Canvas = GameObject.Find("Canvas");
-
-    public static RunningState GameState = RunningState.NotYetStarted;
+    
+    public static void GameStart()
+    {
+        GameState = RunningState.Running;
+    }
     
     public static void EndGameAsDefeat()
     {
         GameState = RunningState.GameOver;
+        SceneManager.LoadScene((int) SceneIndexTable.Defeat);
     }
 
     public static void EndRoundAsWin()
     {
-        SwitchTimeOfDay(_isNight);
-        _isNight = !_isNight;
+        if (_isNight && ++_numNightsSurvived == NumNightsToWin)
+        {
+            GameState = RunningState.GameOver;
+            SceneManager.LoadScene((int) SceneIndexTable.Win);
+        }
+        else
+        {
+            SwitchTimeOfDay(_isNight);
+            _isNight = !_isNight;
+        }
     }
 
     private static void SwitchTimeOfDay(bool isSwitchingToDay)
