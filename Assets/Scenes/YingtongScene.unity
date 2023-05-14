@@ -562,7 +562,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1371457863852944952, guid: f0af2c09bdcc6ee4d9b1714b544ef890, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1371457863852944952, guid: f0af2c09bdcc6ee4d9b1714b544ef890, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1401,7 +1401,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 540194299}
   - {fileID: 1788822516}
   - {fileID: 1882817524}
   - {fileID: 1387961316}
@@ -2272,7 +2271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1773000317}
-  playerTransform: {fileID: 8325447302627404448}
   cameraType: 1
   maxDeviationY: 0.4
   maxDeviationX: 0.05

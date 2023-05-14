@@ -1011,17 +1011,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6014001025478572033, guid: 3b21fd9d70ed56642a4214ac7fe0c2da, type: 3}
   m_PrefabInstance: {fileID: 633177984}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &934146132 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6276679987954921188, guid: ca3338b799afe469181ec374b44f272e, type: 3}
-  m_PrefabInstance: {fileID: 2006255174}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &941210365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1504,7 +1493,7 @@ Transform:
   - {fileID: 1901532503}
   - {fileID: 1518074307}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1554480780
 PrefabInstance:
@@ -1671,7 +1660,7 @@ Transform:
   - {fileID: 199678143}
   - {fileID: 1338573295}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1654150057 stripped
 Transform:
@@ -1930,7 +1919,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1773000315
 GameObject:
@@ -2030,7 +2019,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1773000317}
-  playerTransform: {fileID: 8325447302627404448}
   cameraType: 1
   maxDeviationY: 0.4
   maxDeviationX: 0.05
@@ -2319,7 +2307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6276679987578424852, guid: ca3338b799afe469181ec374b44f272e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6276679987578424852, guid: ca3338b799afe469181ec374b44f272e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2449,7 +2437,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2093531839 stripped
 Transform:
@@ -2702,7 +2690,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc80e1d07f42c43aca1460e48e4598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpSlider: {fileID: 0}
   maxPlayerHealth: 20
-  _gameHandler: {fileID: 2040863531}
-  _hpSlider: {fileID: 934146132}
-  _immuneMax: 3
+  immuneTimeAtGameStart: 3
+  immuneTimeAtDamage: 3
+  remainingImmuneTime: 0
+  isImmune: 0
+  playerHealth: 0
