@@ -25,6 +25,7 @@ public static class GameManager
     private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
     private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
     private static readonly GameObject InventoryContainer = GameObject.Find("InventoryContainer");
+    private static readonly GameObject Canvas = GameObject.Find("Canvas");
 
     public static RunningState GameState = RunningState.NotYetStarted;
     
@@ -50,6 +51,7 @@ public static class GameManager
         else MusicManager.Instance.PlayNightmareMusic();
         
         InventoryContainer.GetComponent<InventoryContainer>().ChangeSprite(isSwitchingToDay);
+        Canvas.GetComponent<TimeManager>().ChangeSprite(isSwitchingToDay);
         
         foreach (var pack in Healthpacks)
         {

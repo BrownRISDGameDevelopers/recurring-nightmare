@@ -1,29 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] private GameObject timerTextObj;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private Image timerBackground;
     [SerializeField] private GameObject startTextObj;
-    [SerializeField] private GameObject endTextObj;
+    [SerializeField] private Sprite dayBackground;
+    [SerializeField] private Sprite nightBackground;
     
-    private Text _timerText;
-    private Text _startText;
-    private Text _endText;
-    // Start is called before the first frame update
     void Start()
     {
-        _timerText = timerTextObj.GetComponent<Text>();
-        _startText = startTextObj.GetComponent<Text>();
-        _endText = endTextObj.GetComponent<Text>();
         UpdateOverlay();
     }
     
     void UpdateOverlay()
     {
-        _timerText.text = "Time: " + (int)GameManager.RemainingTime;
+        timerText.text = Mathf.RoundToInt(GameManager.RemainingTime).ToString();
     }
 
     // Update is called once per frame
@@ -46,5 +42,10 @@ public class TimeManager : MonoBehaviour
             GameManager.GameState = GameManager.RunningState.Running;
             startTextObj.SetActive(false);
         }
+    }
+
+    public void ChangeSprite(bool isSwitchingToDay)
+    {
+        timerBackground.sprite = isSwitchingToDay ? dayBackground : nightBackground;
     }
 }
