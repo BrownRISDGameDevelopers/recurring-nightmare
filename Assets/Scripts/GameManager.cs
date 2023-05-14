@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public static class GameManager
 {
-    private static readonly Vector3 DefaultPos = new Vector3(-30, -8, -5);
+    private static readonly Vector3 DefaultPos = new(-30, -8, -5);
 
     public enum RunningState
     {
@@ -16,7 +16,7 @@ public static class GameManager
         GameOver = -1,
     }
     
-    private const float TotalTime = 60f;
+    private const float TotalTime = 4f;
     private static bool _isNight = true;
 
     public static float RemainingTime = TotalTime;
@@ -24,7 +24,7 @@ public static class GameManager
     public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
     private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
     private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-    private static readonly GameObject InventoryContainer = GameObject.Find("Inventory Container");
+    private static readonly GameObject InventoryContainer = GameObject.Find("InventoryContainer");
 
     public static RunningState GameState = RunningState.NotYetStarted;
     
