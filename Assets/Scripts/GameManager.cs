@@ -38,10 +38,10 @@ public static class GameManager
     private static bool _isNight = false;
     public static float RemainingTime = TotalTime;
     public static RunningState GameState = RunningState.NotYetStarted;
-
     
     public static readonly GameObject Player = GameObject.FindGameObjectWithTag("Player");
     
+    // TODO: Eventually move to Events to let other scripts know of Night Day switches
     private static readonly GameObject[] Healthpacks = GameObject.FindGameObjectsWithTag("Healthpack");
     private static readonly GameObject[] EnemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
     private static readonly GameObject InventoryContainer = GameObject.Find("InventoryContainer");
