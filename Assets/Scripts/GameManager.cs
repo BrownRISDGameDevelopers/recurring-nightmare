@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public static class GameManager
 {
     [Header("Difficulty Settings")]
-    private const float TotalTime = 5f;
+    private const float TotalTime = 20f;
     private const int NumNightsToWin = 3;
     
     private static readonly Vector3 DefaultPos = new(-7.3f, -15, -5);
@@ -81,6 +81,7 @@ public static class GameManager
     public static void EndGameAsDefeat()
     {
         GameState = RunningState.GameOver;
+        MusicManager.Instance.Stop();
         SceneManager.LoadScene((int) SceneIndexTable.Defeat);
     }
 
@@ -89,6 +90,7 @@ public static class GameManager
         if (_isNight && ++_numNightsSurvived == NumNightsToWin)
         {
             GameState = RunningState.GameOver;
+            MusicManager.Instance.Stop();
             SceneManager.LoadScene((int) SceneIndexTable.Win);
         }
         else
