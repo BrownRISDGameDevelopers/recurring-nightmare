@@ -24,6 +24,11 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void Stop()
+    {
+        audioSource.Stop();
+    }
+
     public void PlayDaytimeMusic()
     {
         audioSource.Stop();
