@@ -16,7 +16,7 @@ public static class GameManager
         GameOver = -1,
     }
     
-    private const float TotalTime = 4f;
+    private const float TotalTime = 60f;
     private static bool _isNight = true;
 
     public static float RemainingTime = TotalTime;
