@@ -2640,12 +2640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3661b0ca437a741bafbb01bc71e758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1773000317}
-  cameraType: 1
   maxDeviationY: 0.4
   maxDeviationX: 0.05
-  minViewPortSize: {x: -30, y: -5}
-  maxViewPortSize: {x: 30, y: 25}
+  offset: {x: 0, y: -1, z: -5}
 --- !u!114 &1773000320
 MonoBehaviour:
   m_ObjectHideFlags: 0
