@@ -879,3 +879,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 92b0afd1eb679a84895754f31a75e712, type: 3}
   - {fileID: 8300000, guid: a0630dd73a38da941b047232af47dee2, type: 3}
   loop: 0
+  playOnAwake: 0
