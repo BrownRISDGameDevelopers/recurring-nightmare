@@ -8,7 +8,11 @@ public class EnemyFlying : MonoBehaviour
     Vector3 basePosition;
     NavMeshAgent agent;
     GameObject target = null;
-    bool track = true;
+    bool track = false;
+
+    [SerializeField] AudioSwitcher idleAudioSwitcher;
+    [SerializeField] AudioSwitcher agitatedAudioSwitcher;
+    [SerializeField] AudioSource alertedAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,7 @@ public class EnemyFlying : MonoBehaviour
     {
         if (GameManager.GameState != GameManager.RunningState.Running) return;
 
+        // Pathfinding
         if (track && target != null)
         {
             // Pathfinding
@@ -40,6 +45,9 @@ public class EnemyFlying : MonoBehaviour
     {
         Debug.Log("start track called");
         track = true;
+        idleAudioSwitcher.Stop();
+        alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
+        agitatedAudioSwitcher.PlayScheduled(AudioSettings.dspTime + 1);
     }
 
     void stopTrack()
@@ -47,6 +55,8 @@ public class EnemyFlying : MonoBehaviour
         Debug.Log("stop track called");
         track = false;
         agent.SetDestination(basePosition);  // Heading to base
+        agitatedAudioSwitcher.Stop();
+        idleAudioSwitcher.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

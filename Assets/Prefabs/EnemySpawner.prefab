@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6364431868787708454}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: EnemySpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,13 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14612341e5786848b22f090e2b43fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameHandler: {fileID: 0}
-  _playerTransform: {fileID: 0}
-  _spawnTime: 10
-  _spawnOnStart: 0
-  _maxEnemies: 1
-  enemy_positions: []
-  enemy_ID: 
+  spawnTime: 10
+  maxEnemies: 1
+  enemyPositions: []
+  enemyID: 
   enemyPrefabList: []
   hasSpawned: 0
 --- !u!61 &6364431868787708454
