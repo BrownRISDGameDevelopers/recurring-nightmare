@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 2903620030052283791}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f414130b285de164e9bf0ddfb4115a21, type: 2}
+  m_Controller: {fileID: 9100000, guid: 99235538f33540f4eacf0f327562ec18, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   movementMagnitude: 50
   maxHorizontalSpeed: 10
   jumpMagnitude: 500
-  maxJumpTime: 0.5
+  maxJumpTime: 0.7
   jumpAcceleration: 5
   airMovementMultiplier: 0.5
   runningAudioSource: {fileID: 6264852526071740981}

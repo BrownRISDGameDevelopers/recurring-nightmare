@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public static class GameManager
 {
     [Header("Difficulty Settings")]
-    private const float TotalTime = 20f;
+    private const float TotalTime = 45f;
     private const int NumNightsToWin = 3;
     
     private static readonly Vector3 DefaultPos = new(-7.3f, -15, -5);
