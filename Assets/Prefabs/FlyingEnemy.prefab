@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4548189171782877499}
   - component: {fileID: 1483422826161477945}
   - component: {fileID: 2807529762359072857}
-  - component: {fileID: 6152469215690604525}
+  - component: {fileID: 1588828977449122838}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 1320827745346533499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
-  m_LocalScale: {x: 2.7460642, y: 2.6856632, z: 1}
+  m_LocalScale: {x: 2.1273417, y: 2.159441, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7929741857778367328}
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75659cc15f5cba4782e5b28552d0f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactDamage: 2
   idleAudioSwitcher: {fileID: 1483422826161477945}
   agitatedAudioSwitcher: {fileID: 2807529762359072857}
   alertedAudioSource: {fileID: 4548189171782877499}
@@ -110,7 +111,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -450,7 +451,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e3417d1e784f2ea4abb9519ff7c4b8f5, type: 3}
   loop: 1
   playOnAwake: 0
---- !u!114 &6152469215690604525
+--- !u!114 &1588828977449122838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,11 +460,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1320827745346533499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58778f114cc72649b8c8c831dee39ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c76d19da5787244b901511ff7cd8749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBody: {fileID: 1318297076238950662}
   spriteRenderer: {fileID: 366261865730322200}
+  flip: 1
+  agent: {fileID: 5065751765202971225}
 --- !u!1 &6189921346760467122
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,8 +490,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6189921346760467122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.00076301, z: 0}
+  m_LocalScale: {x: 0.9236992, y: 0.9236992, z: 0.9236992}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3931755521267111546}
@@ -669,7 +671,7 @@ Animator:
   m_GameObject: {fileID: 7729864793325795156}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b2a67f5ce256f09458ebd40a26ee46a2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8a29ca083deb6784cbef8d1135eef0a8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

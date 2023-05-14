@@ -10,6 +10,8 @@ public class EnemyFlying : MonoBehaviour
     GameObject target = null;
     bool track = false;
 
+    [SerializeField] private float contactDamage = 2f;
+
     [SerializeField] AudioSwitcher idleAudioSwitcher;
     [SerializeField] AudioSwitcher agitatedAudioSwitcher;
     [SerializeField] AudioSource alertedAudioSource;
@@ -43,7 +45,7 @@ public class EnemyFlying : MonoBehaviour
 
     void startTrack()
     {
-        Debug.Log("start track called");
+        // Debug.Log("start track called");
         track = true;
         idleAudioSwitcher.Stop();
         alertedAudioSource.PlayOneShot(alertedAudioSource.clip);
@@ -52,7 +54,7 @@ public class EnemyFlying : MonoBehaviour
 
     void stopTrack()
     {
-        Debug.Log("stop track called");
+        // Debug.Log("stop track called");
         track = false;
         agent.SetDestination(basePosition);  // Heading to base
         agitatedAudioSwitcher.Stop();
@@ -64,7 +66,8 @@ public class EnemyFlying : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             track = false;
-            agent.SetDestination(transform.position);  // Heading to base
+            collision.gameObject.GetComponent<PlayerHealth>().Damage(contactDamage, true);
+            agent.SetDestination(transform.position);  // Stop
         }
     }
 
