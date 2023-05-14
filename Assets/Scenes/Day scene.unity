@@ -26953,6 +26953,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2098691843, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 882133338}
+    - target: {fileID: 2098691843, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+      propertyPath: timerBackground
+      value: 
+      objectReference: {fileID: 882133339}
     - target: {fileID: 6276679987578424851, guid: ca3338b799afe469181ec374b44f272e, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -27051,6 +27059,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+--- !u!114 &882133338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8909167726206689364, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+  m_PrefabInstance: {fileID: 882133337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &882133339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6276679988785279123, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+  m_PrefabInstance: {fileID: 882133337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &882133340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7725574156143860108, guid: ca3338b799afe469181ec374b44f272e, type: 3}
+  m_PrefabInstance: {fileID: 882133337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &894421579
 GameObject:
   m_ObjectHideFlags: 0
@@ -71910,6 +71945,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1675053286, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 882133340}
     - target: {fileID: 8325447302627404449, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: hpSlider
       value: 
@@ -71969,6 +72008,10 @@ PrefabInstance:
     - target: {fileID: 8325447303659232302, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325447303659232303, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
+      propertyPath: maxJumpTime
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8325447303659232303, guid: c35ab22d5759f3c4f8924fd0d0c4d068, type: 3}
       propertyPath: _gameHandler
