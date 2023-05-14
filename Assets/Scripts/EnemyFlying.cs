@@ -12,6 +12,7 @@ public class EnemyFlying : MonoBehaviour
 
     [SerializeField] private float contactDamage = 2f;
 
+    [Header("Audio")]
     [SerializeField] AudioSwitcher idleAudioSwitcher;
     [SerializeField] AudioSwitcher agitatedAudioSwitcher;
     [SerializeField] AudioSource alertedAudioSource;
